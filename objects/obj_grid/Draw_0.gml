@@ -22,7 +22,7 @@ for(var ii=0; ii<global.gridsx; ii += 1) //set grid along X axis
 				R_b = min((lerp(0,255,R/base)),255) //let colour = percentage of way to base number
 				G_b = min((lerp(0,255,G/base)),255)
 				B_b = min((lerp(0,255,B/base)),255)
-				col_array[0] = R_b
+				col_array[0] = R_b //set values to array
 				col_array[1] = G_b
 				col_array[2] = B_b
 			} 
@@ -34,12 +34,11 @@ for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
 		for(var i=0; i<global.gridsy; i += 1) //draw grid along y axis
 			{				
 				col_array = ds[# ii,i]
-				c1 = col_array[0]
+				c1 = col_array[0] //remember values
 				c2 = col_array[1]
 				c3 = col_array[2]
 				gsd = gs/4 //magrgin around small cells
-				if i < global.gridsy-1 then //if not at top of grid
-				
+				if i < global.gridsy-1 then //if not at top of grid			
 					{				
 						col_array1 = ds[# ii,i+1] //set second array to grid above
 						cc1 = col_array1[0]
@@ -64,8 +63,7 @@ for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
 						//draw_circle(xx+((gs*ii)+gsd),(yy-(gs*i))-gsd,3,0) 
 						draw_rectangle(xx+((gs*ii)+gsd),(yy-(gs*i))-gsd,xx+(gs+(gs*ii))-gsd,yy-(gs*(i+1)),0) 
 						//draw_rectangle(xx+((gs*ii)),(yy-(gs*i)),xx+(gs+(gs*ii)),yy-(gs*(i+1)),0) 
-					}
-				
+					}			
 				
 				//begin to draw small cells
 				col = make_color_rgb(c1,c2,c3)
@@ -84,7 +82,7 @@ for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
 				draw_set_alpha(1)
 			} 
 	}
-scr_sum()
+scr_sum() //recalculate totals
 	
 
 //DRAW GRAPH AXIS
@@ -133,6 +131,28 @@ for(var ii=0; ii<global.minig_x; ii += 1) //draw grid along X axis
 				draw_set_alpha(0.4)
 			//	draw_rectangle(mx+(mgs*ii),my-(mgs*i)+2,mx+mgs+(mgs*ii),my-(mgs*(i+1)),1) //draw squares outline 					
 				draw_set_alpha(1)
+			}
+	}
+	
+//DRAW NUMBER AXIS
+
+
+if AM_PM = 0 //if AM_PM is on 24hr mode
+	{
+		var gm = global.margin
+		var sx = global.startx-(global.startx/5)
+		var sy = global.starty
+		var hz = global.h_zero
+		var sz = global.gridsize
+		
+		for(var i=global.h_zero; i<24; i +=1) //draw numbers on axis
+			{
+				draw_text((sz*global.gridsx/24)*(i-hz)+sx,sy+(gm/2),string(i))
+			}
+		filled = 24 - global.h_zero //number of hours filled
+		for(var i=filled; i<24; i +=1) //draw numbers on axis
+			{
+				draw_text((sz*global.gridsx/24)*(i)+sx,sy+(gm/2),string(i-filled))
 			}
 	}
 

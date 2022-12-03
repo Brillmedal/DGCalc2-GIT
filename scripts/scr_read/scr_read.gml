@@ -1,4 +1,4 @@
-function scr_read(){
+function scr_read(argument0,argument1){
 
 ii = argument0 //position to read from (adjusts placement in file)
 pl = argument1 //retrieve and return this value
@@ -42,6 +42,9 @@ if file_exists("list.txt") //if file exists
 	T18 = file_text_read_real(file) 
 	T19 = file_text_read_real(file) 
 	T20 = file_text_read_real(file) 
+	T21 = file_text_read_real(file) 
+	T22 = file_text_read_real(file) 
+	T23 = file_text_read_real(file) 
 	unit = file_text_read_real(file)
 	if pl = 3 {return unit}
 }

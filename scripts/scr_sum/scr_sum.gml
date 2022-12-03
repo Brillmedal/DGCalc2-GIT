@@ -33,7 +33,6 @@ for(var ii=0; ii<global.gridsx; ii += 1) //fill totals along X axis
 				sum[ii][4] = sum_4
 				sum[ii][5] = sum_5
 				sum[ii][6] = sum_6-(sum_6*pc*sum[ii][7]) //subtract 5% for every drug on the timeframe
-
 			}
 	}
 }

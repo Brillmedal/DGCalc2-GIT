@@ -52,6 +52,9 @@ if !file_exists("list1.txt") //if file doesn't exist
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
 		file_text_writeln(file);
 		file_text_write_real(file, "2");
 		file_text_writeln(file);
@@ -83,7 +86,10 @@ if !file_exists("list1.txt") //if file doesn't exist
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0")
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");;
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
 		file_text_writeln(file);
@@ -101,6 +107,9 @@ for (var i = 0; i < 15; ++i;)
 		file_text_writeln(file);
 	    file_text_write_string(file, "0");
 		file_text_writeln(file);
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
