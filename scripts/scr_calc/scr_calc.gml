@@ -2,6 +2,9 @@ function scr_calc()
 {
 
 //Read stats to array
+
+scr_colour()
+
 psych = psych*global.m //value from 0-255
 stim = stim*global.m
 diss = diss*global.m

@@ -13,6 +13,8 @@ if !file_exists("list1.txt") //if file doesn't exist
 
 	    file_text_write_string(file, "DRUG NAME");
 	    file_text_writeln(file);
+		file_text_write_string(file, "COLOUR (1=RED 2=ORANGE 3=YELLOW 4=LIME 5=GREEN 6=TEAL 7=BLUE 8=AZURE 9=INDIGO 10=VIOLET 11=PINK");	
+		file_text_writeln(file);
 		file_text_write_string(file, "Pyschedelic/Stimulating/Dissociating, percentage must add up to 100%");
 		file_text_writeln(file);
 	    file_text_write_string(file, "BASE DOSAGE");
@@ -25,6 +27,8 @@ if !file_exists("list1.txt") //if file doesn't exist
 		
 		file_text_write_string(file, "LSD");
 	    file_text_writeln(file);
+		file_text_write_real(file, "4");
+		file_text_writeln(file);
 		file_text_write_real(file, "70");
 		file_text_write_real(file, "25");
 		file_text_write_real(file, "5");
@@ -62,6 +66,8 @@ if !file_exists("list1.txt") //if file doesn't exist
 		
 		file_text_write_string(file, "MDMA");
 	    file_text_writeln(file);
+		file_text_write_real(file, "11");
+		file_text_writeln(file);
 		file_text_write_real(file, "25");
 		file_text_write_real(file, "70");
 		file_text_write_real(file, "5");
@@ -101,6 +107,8 @@ for (var i = 0; i < 15; ++i;)
 {
 		file_text_write_string(file, "-");
 	    file_text_writeln(file);
+		file_text_write_real(file, "1");
+		file_text_writeln(file);
 		file_text_write_real(file, "25");
 		file_text_write_real(file, "70");
 		file_text_write_real(file, "5");

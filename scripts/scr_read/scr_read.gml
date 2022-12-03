@@ -9,12 +9,13 @@ if file_exists("list.txt") //if file exists
 
 	file = file_text_open_read(working_directory + "list.txt"); //Open file to read
 
-	for (var i = 0; i < (6*ii); i += 1;) //skip to initial stats
+	for (var i = 0; i < (7*ii); i += 1;) //skip to initial stats
 		{
 			file_text_readln(file);
 		}
 		
 	name = file_text_read_string(file)
+	colour = file_text_read_real(file) 
 	if pl = 1 {return name}
 	psych = file_text_read_real(file) 
 	stim = file_text_read_real(file) 
@@ -47,6 +48,7 @@ if file_exists("list.txt") //if file exists
 	T23 = file_text_read_real(file) 
 	unit = file_text_read_real(file)
 	if pl = 3 {return unit}
+	
 }
 
 }

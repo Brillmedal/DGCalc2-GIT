@@ -18,5 +18,6 @@ global.max_list = 22 //max no of entries at once
 global.count = 0 //current no of entries
 global.enter = 0
 global.written = 0
+global.effect = 0
 
 }
