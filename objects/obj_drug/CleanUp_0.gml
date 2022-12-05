@@ -43,3 +43,4 @@ list[# 3,cel] = -1
 list[# 4,cel] = -1
 global.written -= 1
 }
+

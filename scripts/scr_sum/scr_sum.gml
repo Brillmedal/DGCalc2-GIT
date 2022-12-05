@@ -12,6 +12,10 @@ for(var ii=0; ii<global.gridsx; ii += 1) //fill totals along X axis
 		var sum_6 = 0
 		var sum_7 = 0
 		sum[ii][7] = sum_7
+		if ii < global.gridsx-1
+			{
+				sum[ii+1][6] = sum_6 //set array infront ready for adding to
+			}
 		pc = global.synergy
 
 		
@@ -31,8 +35,24 @@ for(var ii=0; ii<global.gridsx; ii += 1) //fill totals along X axis
 				sum[ii][2] = sum_2
 				sum[ii][3] = sum_3
 				sum[ii][4] = sum_4
-				sum[ii][5] = sum_5
-				sum[ii][6] = sum_6-(sum_6*pc*sum[ii][7]) //subtract 5% for every drug on the timeframe
+				sum[ii][5] = sum_5	
+				sum_spare = 0
+				sum[ii][6] = sum_spare + sum_6-(sum_6*pc*sum[ii][7]) //subtract 5% for every drug on the timeframe
+				
+				
+				//if sum6 totals is greater than gridsy then add spare totals to next column over
+				s6 = sum[ii][6]
+				if s6 > global.gridsy	
+					{
+						spare = s6 - global.gridsy //how many spare cells?
+						//sum[ii][6] = global.gridsy	
+						//for(var iii=1; iii<spare+1; iii += 1) //run as many times as cells over
+					//		{	//push into next array
+								//isum = ii+iii //check number along x grid
+								//if isum < global.gridsx-1 //if still smaller than width of grid
+								//{ sum[ii+iii][6] += 1 }
+						//	}
+					}
 			}
 	}
 }

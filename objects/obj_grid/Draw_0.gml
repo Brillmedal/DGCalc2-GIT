@@ -104,6 +104,8 @@ if global.clear = 1 //RESET INSTANCES
 			//global.select = 1
 			inst = scr_drug(global.drugs_max,0,0,1,0)
 			global.clear = 0
+			alarm[0] = 2 //recalculate totals
+			
 			
 			//scr_save(global.preset)
 		}
@@ -197,7 +199,6 @@ for(var ii=0; ii<global.gridsx; ii += 1) //set grid along X axis
 			} 
 	}				
 				
-	
 for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
 	{		
 		for(var i=0; i<global.gridsy; i += 1) //draw grid along y axis
@@ -227,14 +228,14 @@ for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
 				
 				col = make_color_rgb(ct1,ct2,ct3)
 				draw_set_colour(col)	
-				if i < (av-1)
+				if i < (av-1) //draw small cells
 					{
 						//draw_circle(xx+((gs*ii)+gsd),(yy-(gs*i))-gsd,3,0) 
 						draw_rectangle(xx+((gs*ii)+gsd),(yy-(gs*i))-gsd,xx+(gs+(gs*ii))-gsd,yy-(gs*(i+1)),0) 
 						//draw_rectangle(xx+((gs*ii)),(yy-(gs*i)),xx+(gs+(gs*ii)),yy-(gs*(i+1)),0) 
 					}			
 				
-				//begin to draw small cells
+				//begin to draw large cells
 				col = make_color_rgb(c1,c2,c3)
 				draw_set_colour(col)
 		
@@ -251,7 +252,6 @@ for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
 				draw_set_alpha(1)
 			} 
 	}
-scr_sum() //recalculate totals
 	
 
 //DRAW GRAPH AXIS
@@ -471,6 +471,7 @@ if global.enter = 1
 {
 	if global.count < (max_list-1)
 		{
+			alarm[0] = 2 //recalculate totals
 			inst = undefined;
 			global.select = 1;
 			global.drug = global.drugs_max;
@@ -490,6 +491,7 @@ if global.select = 1 then //if selected a box
 		inst = scr_drug(global.drug,global.dosage,global.hour,global.tolerance,0); //create drug with asked dosage}
 		with (inst_prev) { instance_destroy(id) } //delete old one
 		global.select = 0 //reset select
+		alarm[0] = 2 //recalculate totals
 		
 					//BEGIN TO ORDER SCHEDULE
 		

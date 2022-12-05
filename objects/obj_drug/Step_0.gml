@@ -41,6 +41,7 @@ if done != 1 //if not done
 				}
 		}
 		done = 1
+		alarm[0] = 2 //recalculate totals
 	}
 	
 	//if enter and count is less than max list then allow to write
@@ -55,5 +56,6 @@ if written = 1 && done_b = 0
 		{if cel = -1 && list[# 0,i] = -1 then { list[# 0,i] = drug; list[# 1,i] = hour; list[# 2,i] = dosage; list[# 3,i] = tolerance; list[# 4,i] = id; list[# 5,i] = unit; cel = i;} }
 		global.written += 1
 		done_b = 1
+		alarm[0] = 2 //recalculate totals
 	}
 	
