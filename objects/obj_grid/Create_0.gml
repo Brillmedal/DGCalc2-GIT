@@ -18,6 +18,5 @@ for(var ii=0; ii<global.gridsx; ii += 1) //assign arrays along X axis
 	}
 
 scr_sum() //calculate totals
-alarm[0] = 2 //recalculate totals
 base = global.base //shorten for reference
 AM_PM = 0 //set time to 24hr
