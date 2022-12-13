@@ -1,8 +1,5 @@
 /// @description 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 var mar = global.menu_width/15 //size of menu margin
 var y_deep = room_height/40
@@ -173,19 +170,12 @@ global.unit = scr_read(global.drug,3)
 file_text_close(file);
 
 
-=======
->>>>>>> parent of 4579d28 (Order schedule)
-=======
->>>>>>> parent of 4579d28 (Order schedule)
-=======
->>>>>>> parent of 4579d28 (Order schedule)
 gs = global.gridsize //shorten grid size
 mgs = global.minigridsize
 var xx = global.startx //starting position of graph
 var yy = global.starty
 var mx = global.minis_x
 var my = global.minis_y
-
 
 //Calculate colour from stats
 
@@ -335,9 +325,6 @@ if AM_PM = 0 //if AM_PM is on 24hr mode
 			}
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 if global.page = 2 //PAGE TWO SCHEDULE
 {	
 	
@@ -539,12 +526,6 @@ if global.select = 1 then //if selected a box
 global.enter = 0
 scr_draw_ds(list,50,50)
 
-=======
->>>>>>> parent of 4579d28 (Order schedule)
-=======
->>>>>>> parent of 4579d28 (Order schedule)
-=======
->>>>>>> parent of 4579d28 (Order schedule)
 //MINI GRID AXIS
 
 draw_set_color(c_black)
