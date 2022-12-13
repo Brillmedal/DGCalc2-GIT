@@ -6,13 +6,11 @@ if !file_exists("3.txt") { var p3 = file_text_open_write(working_directory + "3.
 if !file_exists("4.txt") { var p4 = file_text_open_write(working_directory + "4.txt"); file_text_close(p4);}
 if !file_exists("5.txt") { var p5 = file_text_open_write(working_directory + "5.txt"); file_text_close(p5);}
 
-var c = 0 //begin count
-
 if !file_exists("list1.txt") //if file doesn't exist
 {	
 
 	var file = file_text_open_write(working_directory + "list.txt");
-	
+
 	    file_text_write_string(file, "DRUG NAME");
 	    file_text_writeln(file);
 		file_text_write_string(file, "COLOUR (1=RED 2=ORANGE 3=YELLOW 4=LIME 5=GREEN 6=TEAL 7=BLUE 8=AZURE 9=INDIGO 10=VIOLET 11=PINK");	
@@ -27,7 +25,6 @@ if !file_exists("list1.txt") //if file doesn't exist
 		file_text_writeln(file);
 		file_text_writeln(file);
 		
-		c += 1
 		file_text_write_string(file, "LSD");
 	    file_text_writeln(file);
 		file_text_write_real(file, "4");
@@ -67,7 +64,6 @@ if !file_exists("list1.txt") //if file doesn't exist
 		file_text_writeln(file);
 		file_text_writeln(file);
 		
-		c += 1
 		file_text_write_string(file, "MDMA");
 	    file_text_writeln(file);
 		file_text_write_real(file, "11");
@@ -107,16 +103,15 @@ if !file_exists("list1.txt") //if file doesn't exist
 		file_text_writeln(file);
 		file_text_writeln(file);
 
-for (var i = c; i < global.drugs_max; ++i;)
+for (var i = 0; i < 15; ++i;)
 {
-		c += 1
 		file_text_write_string(file, "-");
 	    file_text_writeln(file);
 		file_text_write_real(file, "1");
 		file_text_writeln(file);
-		file_text_write_real(file, "0");
-		file_text_write_real(file, "0");
-		file_text_write_real(file, "0");
+		file_text_write_real(file, "25");
+		file_text_write_real(file, "70");
+		file_text_write_real(file, "5");
 		file_text_writeln(file);
 	    file_text_write_string(file, "0");
 		file_text_writeln(file);
@@ -138,10 +133,10 @@ for (var i = c; i < global.drugs_max; ++i;)
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
-		file_text_write_real(file, "0")
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
-		file_text_write_real(file, "0");;
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
 		file_text_write_real(file, "0");
 		file_text_writeln(file);

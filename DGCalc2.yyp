@@ -5,7 +5,6 @@
   "resources": [
     {"id":{"name":"scr_sum","path":"scripts/scr_sum/scr_sum.yy",},"order":2,},
     {"id":{"name":"scr_drug","path":"scripts/scr_drug/scr_drug.yy",},"order":3,},
-    {"id":{"name":"scr_draw_ds","path":"scripts/scr_draw_ds/scr_draw_ds.yy",},"order":8,},
     {"id":{"name":"scr_colour","path":"scripts/scr_colour/scr_colour.yy",},"order":6,},
     {"id":{"name":"obj_grid","path":"objects/obj_grid/obj_grid.yy",},"order":0,},
     {"id":{"name":"scr_read","path":"scripts/scr_read/scr_read.yy",},"order":4,},
@@ -13,7 +12,6 @@
     {"id":{"name":"scr_calc","path":"scripts/scr_calc/scr_calc.yy",},"order":5,},
     {"id":{"name":"scr_grid","path":"scripts/scr_grid/scr_grid.yy",},"order":0,},
     {"id":{"name":"obj_drug","path":"objects/obj_drug/obj_drug.yy",},"order":1,},
-    {"id":{"name":"scr_delete","path":"scripts/scr_delete/scr_delete.yy",},"order":7,},
     {"id":{"name":"obj_file","path":"objects/obj_file/obj_file.yy",},"order":2,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],

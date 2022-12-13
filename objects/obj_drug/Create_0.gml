@@ -6,4 +6,3 @@ written = 0
 done_b = 0
 max_list = global.max_list //max number of drugs on list
 global.count += 1
-mull = 0
