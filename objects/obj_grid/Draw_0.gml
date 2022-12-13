@@ -2,6 +2,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 var mar = global.menu_width/15 //size of menu margin
 var y_deep = room_height/40
@@ -178,6 +179,8 @@ file_text_close(file);
 >>>>>>> parent of 4579d28 (Order schedule)
 =======
 >>>>>>> parent of 4579d28 (Order schedule)
+=======
+>>>>>>> parent of 4579d28 (Order schedule)
 gs = global.gridsize //shorten grid size
 mgs = global.minigridsize
 var xx = global.startx //starting position of graph
@@ -332,6 +335,7 @@ if AM_PM = 0 //if AM_PM is on 24hr mode
 			}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 if global.page = 2 //PAGE TWO SCHEDULE
@@ -537,6 +541,8 @@ if global.select = 1 then //if selected a box
 global.enter = 0
 scr_draw_ds(list,50,50)
 
+=======
+>>>>>>> parent of 4579d28 (Order schedule)
 =======
 >>>>>>> parent of 4579d28 (Order schedule)
 =======
