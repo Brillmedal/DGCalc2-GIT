@@ -3,7 +3,7 @@ var hr = hour*g //set local var to be changed
 t = 0
 if null = 0
 {
-for(var ii=0; ii<(global.gridsx-(hour+1)); ii += 1) //run as many times 
+for(var ii=0; ii<(global.gridsx-(hour*g)); ii += 1) //run as many times 
 	{
 		mem = round(stats[t]) //remember current stats of time
 		for(var i=0; i<mem; i += 1) //loop upwards while less than stat value

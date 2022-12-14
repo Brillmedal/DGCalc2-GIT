@@ -5,6 +5,7 @@ function scr_calc()
 
 scr_colour()
 
+//if extend then {} //if extend drug 
 psych = psych*global.m //value from 0-255
 stim = stim*global.m
 diss = diss*global.m
@@ -38,6 +39,28 @@ stats[23*g] = min(global.gridsy,T23 * m)
 
 for(var i=0; i<23; i += 1)
 {
+	if global.extend //check if extend or not
+		{
+			if (i < (length*global.ext_len)) //extend drug by 30% in length based on current length
+				{
+					if stats[i*g] < (5*m)  //if chosen stat is less than 5 
+						{
+							stats[i*g] = min(global.gridsy,stats[i*g]*global.ext_height) //increase height by 20%
+						}
+					if stats[i*g] = (0)  //if chosen stat is zero
+						{
+							stats[i*g] = min(global.gridsy,1*m) //add by one
+						}	
+					
+
+				}
+			
+		}
+}
+
+for(var i=0; i<23; i += 1)
+{	
+	
 	if g >= 2 //if divisible by 2
 		{
 			stats[(i*g)+(g/2)] = mean(stats[i*g],stats[(i*g)+g]) //set stats for array that is halfway between ones already set, to the average

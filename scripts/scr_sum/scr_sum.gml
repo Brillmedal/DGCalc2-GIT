@@ -1,6 +1,9 @@
 function scr_sum()
 
 {
+	
+global.peaked = 0 //reset peaked
+	
 for(var ii=0; ii<global.gridsx; ii += 1) //fill totals along X axis
 	{		
 		var sum_0 = 0
@@ -33,6 +36,18 @@ for(var ii=0; ii<global.gridsx; ii += 1) //fill totals along X axis
 				sum[ii][4] = sum_4
 				sum[ii][5] = sum_5
 				sum[ii][6] = sum_6-(sum_6*pc*sum[ii][7]) //subtract 5% for every drug on the timeframe
+				if sum[ii][6] > (global.gridsy*global.peak_height) //if number is greater than 90% of chart
+				{
+					global.peaked += 1
+				}
 			}
 	}
+	if global.peaked > global.gridsx*global.peak_percentage//if greater than 35% of chart is peaked
+		{
+			global.extend = 1
+		}
+	else
+		{
+			global.extend = 0
+		}
 }

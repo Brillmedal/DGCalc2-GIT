@@ -524,7 +524,7 @@ if global.select = 1 then //if selected a box
 	}
 
 global.enter = 0
-scr_draw_ds(list,50,50)
+//scr_draw_ds(list,50,50)
 
 //MINI GRID AXIS
 

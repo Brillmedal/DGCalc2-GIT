@@ -3,6 +3,7 @@
   "resourceVersion": "1.6",
   "name": "DGCalc2",
   "resources": [
+    {"id":{"name":"scr_recalc","path":"scripts/scr_recalc/scr_recalc.yy",},"order":9,},
     {"id":{"name":"scr_sum","path":"scripts/scr_sum/scr_sum.yy",},"order":2,},
     {"id":{"name":"scr_drug","path":"scripts/scr_drug/scr_drug.yy",},"order":3,},
     {"id":{"name":"scr_draw_ds","path":"scripts/scr_draw_ds/scr_draw_ds.yy",},"order":8,},
@@ -57,6 +58,6 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2022.11.0.54",
+    "IDEVersion": "2022.11.1.56",
   },
 }
