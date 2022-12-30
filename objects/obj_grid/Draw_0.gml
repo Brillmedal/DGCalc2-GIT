@@ -208,7 +208,7 @@ var y_deep = (room_height/40)
 draw_set_colour(c_white)
 var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
 if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
-if hover && mouse_check_button_pressed(mb_left) then {alarm[2] = 2 ; if global.effect = 0 then global.effect = 1 else global.effect = 0 } //if clicked then tell variable
+if hover && mouse_check_button_pressed(mb_left) then {alarm[2] = 2 ; global.select = 1; if global.effect = 0 then global.effect = 1 else global.effect = 0 } //if clicked then tell variable
 if global.effect then { draw_set_alpha(0.5) }
 draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
 draw_set_alpha(1) //reset colour + alpha
@@ -307,6 +307,12 @@ for(var ii=0; ii<global.gridsx; ii += 1) //set grid along X axis
 				padjust = max(0,lerp(1,0,ptotal*global.p_tol_constant))
 				sadjust = max(0,lerp(1,0,stotal*global.s_tol_constant)) 
 				dadjust = max(0,lerp(1,0,dtotal*global.d_tol_constant)) 
+				if !global.effect then  //if efect is disabled
+					{
+						padjust = 1 //ignore tolerances
+						sadjust = 1
+						dadjust = 1
+					}
 				col_array = ds[# ii,i]
 				R = col_array[3]*padjust //psych stats (RED)
 				G = col_array[4]*sadjust //stim stats (GREEN)
@@ -452,22 +458,35 @@ if global.hr24 = 1 //if AM_PM is on 24hr mode
 				draw_text((sz*global.gridsx/24)*(i)+sx,sy+(gm/2),string(i-filled))
 			}
 	}
-else //CHANGE THIS TO ONLY DRAW ACTUAL VIEWABLE NUMBERS
+else //CHANGE THIS TO ONLY DRAW ACTUAL VIEWABLE NUMBERS //ONLY SHOW TOLERANCE WHEN EFFECT IS ON!!!!
+//////START HERE
 	{
 		var gm = global.margin
 		var sx = global.startx-(global.startx/5)
 		var sy = global.starty
 		var hz = global.h_zero
 		var sz = global.gridsize
+		var zh = global.zoom_hr
 		
-		for(var i=global.h_zero; i<24; i +=1) //draw numbers on axis
+		for(var i=global.h_zero+zh; i<12+zh+hz; i +=1) //draw numbers on axis
 			{
-				draw_text((sz*global.gridsx/24)*(i-hz)+sx,sy+(gm/2),string(i))
+				if i < 24 then
+					{
+						draw_text((sz*global.gridsx/12)*(i-hz-zh)+sx,sy+(gm/2),string(i))
+					}
 			}
 		filled = 24 - global.h_zero //number of hours filled
-		for(var i=filled; i<24; i +=1) //draw numbers on axis
+		for(var i=filled; i<24+zh; i +=1) //draw numbers on axis
 			{
-				draw_text((sz*global.gridsx/24)*(i)+sx,sy+(gm/2),string(i-filled))
+				if (i-filled) < 24-filled
+				{
+					//if (i-filled) < ((24-global.h_zero)+global.zoom_hr)-(22)
+					var out = (global.zoom_hr+global.h_zero)-12 //Gives output of how many numbers are needed on the right side
+					if (i-filled) < out
+						{
+							draw_text((sz*global.gridsx/12)*(i-zh)+sx,sy+(gm/2),string(i-filled))
+						}
+				}
 			}
 	}
 
@@ -606,7 +625,7 @@ if global.page = 2 //PAGE TWO SCHEDULE
 					draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr+12) + ":00" ,1,1,0) //draw stats of drug
 				}
 			}
-	//	draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr),1,1,0) //draw stats of drug
+
 	}
 draw_set_color(c_white)
 draw_text(xx,yy-(y_deep*1.5), "SCHEDULE")
@@ -702,8 +721,9 @@ draw_rectangle(room_width-global.menu_width,0,room_width,room_height,0) //DRAW S
 draw_rectangle(0,0,room_width-(global.menu_width+1),global.bar_depth,0) //DRAW TOP MENU
 draw_set_alpha(1)
 
-draw_text(30,50,global.zoom_hr)
+draw_text(30,50,filled)
 draw_text(1200,420,global.extend)
 draw_text(1200,440,global.peaked)
 
-    draw_text(32, 32, "FPS = " + string(fps));
+    draw_text(32, 32, global.zoom_hr);
+	 draw_text(32, 65, test);

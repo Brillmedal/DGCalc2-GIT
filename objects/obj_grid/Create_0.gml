@@ -29,3 +29,4 @@ b_d = scr_read(global.drug,2) //read temp base dosage
 inst = scr_drug(1,b_d,0,1,0); //create drug
 max_list = global.max_list //max number of drugs on list
 init = 0
+test = 0
