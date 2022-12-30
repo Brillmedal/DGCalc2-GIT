@@ -7,6 +7,7 @@ if done != 1 //if not done
 		scr_read(drug) //run script to assign values
 		file_text_close(file); //close file to be read elsewhere
 		scr_calc() //run calculation for stats
+		//scr_sum() //recalculate totals
 		if dosage = 0 or b_dosage = 0 then null =1 else null = 0
 		if null = 0
 		{
@@ -41,6 +42,7 @@ if done != 1 //if not done
 				}
 		}
 		done = 1
+		alarm[0] = 2 //recalculate totals
 	}
 	
 	//if enter and count is less than max list then allow to write
@@ -55,5 +57,6 @@ if written = 1 && done_b = 0
 		{if cel = -1 && list[# 0,i] = -1 then { list[# 0,i] = drug; list[# 1,i] = hour; list[# 2,i] = dosage; list[# 3,i] = tolerance; list[# 4,i] = id; list[# 5,i] = unit; cel = i;} }
 		global.written += 1
 		done_b = 1
+		alarm[0] = 2 //recalculate totals
 	}
 	

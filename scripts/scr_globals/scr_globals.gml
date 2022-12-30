@@ -6,6 +6,7 @@ global.m = 2.5 //multiplier to times drug colour percentages by
 global.base = 400	//number to base 255 value on
 global.mini_base = 255 //number to base mini grid 255value on
 global.synergy = 0.08 //percentage to decrease per entry 
+global.synergymax = 6 //how many max combos on synergy
 
 global.drug = 0
 global.dosage = 0
@@ -20,6 +21,9 @@ global.ext_len = 1.3
 global.peak_height = 0.9 //percentage of height to be considered a peak
 global.peak_percentage = 0.35//percentage of x axis required to be at peak
 global.peaked = 0 //init
+global.p_tol_constant = 0.0000011//constant to lower subsequent effects by
+global.s_tol_constant = 0.0000014 //constant to lower subsequent effects by
+global.d_tol_constant = 0.0000004 //constant to lower subsequent effects by
 
 
 global.drugs_max = 30
@@ -27,7 +31,7 @@ global.max_list = 22 //max no of entries at once
 global.count = 0 //current no of entries
 global.enter = 0
 global.written = 0
-global.effect = 0
+global.effect = 1 //use colour or effect
 global.page = 0
 global.select = 0
 global.next = 0

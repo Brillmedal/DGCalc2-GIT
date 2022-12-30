@@ -104,6 +104,7 @@ if global.clear = 1 //RESET INSTANCES
 			//global.select = 1
 			inst = scr_drug(global.drugs_max,0,0,1,0)
 			global.clear = 0
+			alarm[1] = 2 //recalculate totals
 			
 			//scr_save(global.preset)
 		}
@@ -177,16 +178,32 @@ var yy = global.starty
 var mx = global.minis_x
 var my = global.minis_y
 
-//Calculate colour from stats
 
+
+//calculate sum of colour for current x plus all those behind it
+//and use that sum to decrease actual values by the tolerance constant
+
+var ptotal = 0 //init variable for adding psych
+var stotal = 0 //init variable for adding stim
+var dtotal = 0 //init variable for adding diss
 for(var ii=0; ii<global.gridsx; ii += 1) //set grid along X axis
-	{		
+	{	
+		ptotal += sum[ii][3]
+		stotal += sum[ii][4]
+		dtotal += sum[ii][5]
 		for(var i=0; i<global.gridsy; i += 1) //set grid along y axis
 			{	
+				//let the adjustment be the inverse decimal of the total div by constant, and no less than zero
+				padjust = max(0,lerp(1,0,ptotal*global.p_tol_constant))
+				sadjust = max(0,lerp(1,0,stotal*global.s_tol_constant)) 
+				dadjust = max(0,lerp(1,0,dtotal*global.d_tol_constant)) 
 				col_array = ds[# ii,i]
-				R = col_array[3] //psych stats (RED)
-				G = col_array[4] //stim stats (GREEN)
-				B = col_array[5] //diss stats (BLUE)
+				R = col_array[3]*padjust //psych stats (RED)
+				G = col_array[4]*sadjust //stim stats (GREEN)
+				//amount to add to dissosiative depending on how much psych or stim was removed
+				//var p_i = 3/(col_array[3]-R) //find how much was removed and take a third of it
+				//var s_i = 
+				B = (col_array[5]*dadjust) //diss stats (BLUE)
 				//cnt = col_array[6] //Count of drugs
 				R_b = min((lerp(0,255,R/base)),255) //let colour = percentage of way to base number
 				G_b = min((lerp(0,255,G/base)),255)
@@ -197,9 +214,10 @@ for(var ii=0; ii<global.gridsx; ii += 1) //set grid along X axis
 			} 
 	}				
 				
-	
+
 for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
-	{		
+	{	
+
 		for(var i=0; i<global.gridsy; i += 1) //draw grid along y axis
 			{				
 				col_array = ds[# ii,i]
@@ -251,7 +269,8 @@ for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
 				draw_set_alpha(1)
 			} 
 	}
-scr_sum() //recalculate totals
+
+if init = 0 then { scr_sum(); init = 1 } //recalculate totals once
 	
 
 //DRAW GRAPH AXIS
@@ -471,6 +490,8 @@ if global.enter = 1
 {
 	if global.count < (max_list-1)
 		{
+			//scr_sum()
+			alarm[1] = 2 //recalculate totals
 			inst = undefined;
 			global.select = 1;
 			global.drug = global.drugs_max;
@@ -482,6 +503,8 @@ if global.enter = 1
 
 if global.select = 1 then //if selected a box
 	{	
+		alarm[2] = 3 //double trigger select
+		//scr_sum() //recalculate totals
 		var inst_prev = inst //set memory of instance
 		if b_d = global.dosage then {same = 1} else {same = 0} //if bd is same as dosage now, tell this variable
 		b_d = scr_read(global.drug,2) //read temp base dosage
@@ -490,6 +513,9 @@ if global.select = 1 then //if selected a box
 		inst = scr_drug(global.drug,global.dosage,global.hour,global.tolerance,0); //create drug with asked dosage}
 		with (inst_prev) { instance_destroy(id) } //delete old one
 		global.select = 0 //reset select
+		//scr_sum()
+		alarm[1] = 2 //recalculate totals
+		
 		
 					//BEGIN TO ORDER SCHEDULE
 		
@@ -522,6 +548,10 @@ if global.select = 1 then //if selected a box
 			}
 		}
 	}
+	draw_text(1200,420,global.extend)
+	
+	//disable peak extension level when alarm has expired
+if alarm[0] = -1 { alarm[0] = 1 }
 
 global.enter = 0
 //scr_draw_ds(list,50,50)
@@ -545,4 +575,8 @@ draw_rectangle(room_width-global.menu_width,0,room_width,room_height,0) //DRAW S
 draw_rectangle(0,0,room_width-(global.menu_width+1),global.bar_depth,0) //DRAW TOP MENU
 draw_set_alpha(1)
 
-draw_text(1200,420,lerp(1,1,255))
+draw_text(30,50,padjust)
+draw_text(1200,420,global.extend)
+draw_text(1200,440,global.peaked)
+
+    draw_text(32, 32, "FPS = " + string(fps));

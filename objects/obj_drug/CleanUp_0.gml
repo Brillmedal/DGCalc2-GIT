@@ -1,6 +1,7 @@
 g = global.gridsx/24 //find how much to divide the stats into
 var hr = hour*g //set local var to be changed
 t = 0
+
 if null = 0
 {
 for(var ii=0; ii<(global.gridsx-(hour*g)); ii += 1) //run as many times 
@@ -43,3 +44,4 @@ list[# 3,cel] = -1
 list[# 4,cel] = -1
 global.written -= 1
 }
+//scr_sum() //recalculate totals

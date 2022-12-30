@@ -37,6 +37,8 @@ stats[21*g] = min(global.gridsy,T21 * m)
 stats[22*g] = min(global.gridsy,T22 * m)
 stats[23*g] = min(global.gridsy,T23 * m)
 
+scr_sum()
+
 for(var i=0; i<23; i += 1)
 {
 	if global.extend //check if extend or not
