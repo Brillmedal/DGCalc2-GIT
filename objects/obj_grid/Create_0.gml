@@ -21,6 +21,7 @@ for(var ii=0; ii<global.gridsx; ii += 1) //assign arrays along X axis
 			{ ds[# ii,i] = array_create(7,0) }
 	}
 
+draw_set_font(fnt_default);
 scr_sum() //calculate totals
 base = global.base //shorten for reference
 AM_PM = 0 //set time to 24hr

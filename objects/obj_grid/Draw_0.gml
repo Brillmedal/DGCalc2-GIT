@@ -1,6 +1,3 @@
-/// @description 
-
-
 var mar = global.menu_width/15 //size of menu margin
 var y_deep = room_height/40
 var px_mar = y_deep*0.2
@@ -18,6 +15,8 @@ if global.next = 1 then
 	if (global.page < 2) then {global.page += 1}
 	global.next = 0
 }
+
+
 
 
 //DRAW BACK+NEXT BUTTON
@@ -97,6 +96,24 @@ draw_text(xx,yy-(y_deep*2.5), "COMPOUND")
 
 }
 
+//CLEAR BUTTON
+
+var xx = mar*1
+var yy = mar*1
+var x_wide = ((mar*4)) //size
+var y_deep = (room_height/40) 
+
+
+draw_set_colour(c_white)
+var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+if hover && mouse_check_button_pressed(mb_left) then { global.clear = 1; } //if clicked then tell variable
+draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+draw_set_alpha(1) //reset colour + alpha
+draw_set_colour(c_black)
+draw_text(xx,yy,string("CLEAR"))
+	
+
 if global.clear = 1 //RESET INSTANCES
 	
 		{
@@ -104,11 +121,83 @@ if global.clear = 1 //RESET INSTANCES
 			//global.select = 1
 			inst = scr_drug(global.drugs_max,0,0,1,0)
 			global.clear = 0
-			alarm[1] = 2 //recalculate totals
+			alarm[1] = 2 //recalculate select
 			
 			//scr_save(global.preset)
 		}
 		
+//shift hours over left
+
+var xx = mar*6
+var yy = mar*1
+var x_wide = ((mar*1.4)) //size
+var y_deep = (room_height/40) 
+
+draw_set_colour(c_white)
+var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+if hover && mouse_check_button_pressed(mb_left)
+then 
+	{
+		if global.hr24
+		then
+			{ global.h_zero -= 1;}
+		else 
+			{ global.zoom_hr -= 1 }
+	} 
+draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+draw_set_alpha(1) //reset colour + alpha
+draw_set_colour(c_black)
+draw_text(xx,yy,string("<<<"))
+
+//shift hours over right
+
+var xx = mar*11.5
+var yy = mar*1
+var x_wide = ((mar*1.4)) //size
+var y_deep = (room_height/40) 
+
+draw_set_colour(c_white)
+var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+if hover && mouse_check_button_pressed(mb_left)
+then //if clicked then tell variable
+	{
+		if global.hr24
+		then
+			{ global.h_zero += 1; }
+		else
+		{ global.zoom_hr += 1 }
+	} 
+draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+draw_set_alpha(1) //reset colour + alpha
+draw_set_colour(c_black)
+draw_text(xx,yy,string(">>>"))
+
+//recalc actual hours
+
+if global.h_zero > 23 then global.h_zero = 0 
+if global.h_zero < 0 then global.h_zero = 23 
+if global.zoom_hr > 12 then global.zoom_hr = 12
+if global.zoom_hr < 0 then global.zoom_hr = 0 
+
+//lock hours to 24 or 12 format
+
+var xx = mar*8
+var yy = mar*1
+var x_wide = ((mar*3)) //size
+var y_deep = (room_height/40) 
+
+draw_set_colour(c_white)
+var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+if hover && mouse_check_button_pressed(mb_left) then {if global.hr24 = 0 then global.hr24 = 1 else global.hr24 = 0 } //if clicked then tell variable
+draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+draw_set_alpha(1) //reset colour + alpha
+draw_set_colour(c_black)
+draw_text(xx,yy,string("ZOOM"))
+
+
 
 if global.page = 1
 
@@ -172,9 +261,10 @@ file_text_close(file);
 
 
 gs = global.gridsize //shorten grid size
+if global.hr24 then gsizex = global.gridsize else gsizex = global.gridsize*2
 mgs = global.minigridsize
 var xx = global.startx //starting position of graph
-var yy = global.starty
+var yy = global.starty 
 var mx = global.minis_x
 var my = global.minis_y
 
@@ -186,6 +276,8 @@ var my = global.minis_y
 var ptotal = 0 //init variable for adding psych
 var stotal = 0 //init variable for adding stim
 var dtotal = 0 //init variable for adding diss
+//if 24hr disabled then half number of grids drawn
+if global.hr24 then { gridsx_store = global.gridsx } else { gridsx_store = global.gridsx/2 }
 for(var ii=0; ii<global.gridsx; ii += 1) //set grid along X axis
 	{	
 		ptotal += sum[ii][3]
@@ -193,16 +285,13 @@ for(var ii=0; ii<global.gridsx; ii += 1) //set grid along X axis
 		dtotal += sum[ii][5]
 		for(var i=0; i<global.gridsy; i += 1) //set grid along y axis
 			{	
-				//let the adjustment be the inverse decimal of the total div by constant, and no less than zero
+				//let the adjustment be the inverse decimal of the current total div by constant, and no less than zero
 				padjust = max(0,lerp(1,0,ptotal*global.p_tol_constant))
 				sadjust = max(0,lerp(1,0,stotal*global.s_tol_constant)) 
 				dadjust = max(0,lerp(1,0,dtotal*global.d_tol_constant)) 
 				col_array = ds[# ii,i]
 				R = col_array[3]*padjust //psych stats (RED)
 				G = col_array[4]*sadjust //stim stats (GREEN)
-				//amount to add to dissosiative depending on how much psych or stim was removed
-				//var p_i = 3/(col_array[3]-R) //find how much was removed and take a third of it
-				//var s_i = 
 				B = (col_array[5]*dadjust) //diss stats (BLUE)
 				//cnt = col_array[6] //Count of drugs
 				R_b = min((lerp(0,255,R/base)),255) //let colour = percentage of way to base number
@@ -214,8 +303,9 @@ for(var ii=0; ii<global.gridsx; ii += 1) //set grid along X axis
 			} 
 	}				
 				
-
-for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
+var zmr = global.zoom_hr*(global.gridsx/24) //shorten zoom
+if global.hr24 = 1 then zmr = 0 //if opn 24hr mode then reset zoom
+for(var ii=0+zmr; ii<gridsx_store+zmr; ii += 1) //draw grid along X axis
 	{	
 
 		for(var i=0; i<global.gridsy; i += 1) //draw grid along y axis
@@ -247,9 +337,7 @@ for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
 				draw_set_colour(col)	
 				if i < (av-1)
 					{
-						//draw_circle(xx+((gs*ii)+gsd),(yy-(gs*i))-gsd,3,0) 
-						draw_rectangle(xx+((gs*ii)+gsd),(yy-(gs*i))-gsd,xx+(gs+(gs*ii))-gsd,yy-(gs*(i+1)),0) 
-						//draw_rectangle(xx+((gs*ii)),(yy-(gs*i)),xx+(gs+(gs*ii)),yy-(gs*(i+1)),0) 
+						draw_rectangle(xx+((gsizex*(ii-zmr))+gsd),(yy-(gs*i))-gsd,xx+(gsizex+(gsizex*(ii-zmr)))-gsd,yy-(gs*(i+1)),0) 
 					}			
 				
 				//begin to draw small cells
@@ -258,14 +346,12 @@ for(var ii=0; ii<global.gridsx; ii += 1) //draw grid along X axis
 		
 				if col_array[6] !=0
 					{
-					//draw_circle(xx+((gs*ii)+gsd),(yy-(gs*i))-gsd,5,0)
-					//draw_rectangle(xx+((gs*ii)+gsd),(yy-(gs*i))-gsd,xx+(gs+(gs*ii))-gsd,yy-(gs*(i+1)),0) //draw squares colours ofset
-					draw_rectangle(xx+(gs*ii),yy-(gs*i)+2,xx+gs+(gs*ii),yy-(gs*(i+1)),0) //draw squares colours
+						draw_rectangle(xx+(gsizex*(ii-zmr)),yy-(gs*i)+2,xx+gsizex+(gsizex*(ii-zmr)),yy-(gs*(i+1)),0) //draw squares colours
 					}
 
 				draw_set_colour(c_grey)
 				draw_set_alpha(0.05)
-				draw_rectangle(xx+(gs*ii),yy-(gs*i),xx+gs+(gs*ii),yy-(gs*(i+1)),1) //draw squares outlines
+				draw_rectangle(xx+(gsizex*(ii-zmr)),yy-(gs*i),xx+gsizex+(gsizex*(ii-zmr)),yy-(gs*(i+1)),1) //draw squares outlines
 				draw_set_alpha(1)
 			} 
 	}
@@ -279,8 +365,12 @@ if init = 0 then { scr_sum(); init = 1 } //recalculate totals once
 //var yy = global.starty 
 var gsx = global.gridsx //How many grids wide
 var gsy = global.gridsy //How many grids high
-var mgx = global.minig_x //How many min grids wide
+var mgx = gridsx_store/2 //How many min grids wide
 var mgy = global.minig_y //How many min grids high
+global.minigridsize = (global.grid_width/mgx) 
+mgs = global.minigridsize
+ //minigrid size y adjusted
+if global.hr24 = 0 then mgsy = global.minigridsize/2 else mgsy = global.minigridsize
 
 draw_set_color(c_black)
 draw_line_width(xx,yy,xx+(gsx*gs),yy,7) //Draw horizontal line
@@ -291,7 +381,9 @@ draw_line_width(xx,yy,xx+(gsx*gs),yy,7) //Draw horizontal line
 draw_line_width(xx,yy,xx,yy-(gsy*gs),7) //Draw vertical line
 
 //DRAW MINI GRID
-for(var ii=0; ii<global.minig_x; ii += 1) //draw grid along X axis
+
+
+for(var ii=0; ii<gridsx_store/2; ii += 1) //draw grid along X axis
 	{		
 		for(var i=0; i<global.minig_y; i += 1) //draw grid along y axis
 			{	
@@ -314,10 +406,9 @@ for(var ii=0; ii<global.minig_x; ii += 1) //draw grid along X axis
 				col = make_color_rgb(c1,c2,c3)
 				draw_set_colour(col)
 				draw_set_alpha(a123)
-				draw_rectangle(mx+(mgs*ii)+1,my-(mgs*i)+1,mx+mgs+(mgs*ii),my-(mgs*(i+1)),0) //draw squares colours			
+				draw_rectangle(mx+(mgs*ii)+1,my-(mgsy*i)+1,mx+mgs+(mgs*ii),my-(mgsy*(i+1)),0) //draw squares colours			
 				draw_set_colour(c_grey)
-				draw_set_alpha(0.4)
-			//	draw_rectangle(mx+(mgs*ii),my-(mgs*i)+2,mx+mgs+(mgs*ii),my-(mgs*(i+1)),1) //draw squares outline 					
+				draw_set_alpha(0.4)					
 				draw_set_alpha(1)
 			}
 	}
@@ -560,11 +651,11 @@ global.enter = 0
 
 draw_set_color(c_black)
 draw_line_width(mx,my,mx+(mgx*mgs),my,7) //Draw horizontal line
-draw_line_width(mx,my,mx,my-(mgy*mgs),7) //Draw vertical line
+draw_line_width(mx,my,mx,my-(mgy*mgsy),7) //Draw vertical line
 draw_set_alpha(0.4)
 draw_set_color(c_grey)
 draw_line_width(mx,my,mx+(mgx*mgs),my,7) //Draw horizontal line
-draw_line_width(mx,my,mx,my-(mgy*mgs),7) //Draw vertical line
+draw_line_width(mx,my,mx,my-(mgy*mgsy),7) //Draw vertical line
 draw_set_alpha(1)
 
 
@@ -575,7 +666,7 @@ draw_rectangle(room_width-global.menu_width,0,room_width,room_height,0) //DRAW S
 draw_rectangle(0,0,room_width-(global.menu_width+1),global.bar_depth,0) //DRAW TOP MENU
 draw_set_alpha(1)
 
-draw_text(30,50,padjust)
+draw_text(30,50,global.zoom_hr)
 draw_text(1200,420,global.extend)
 draw_text(1200,440,global.peaked)
 
