@@ -192,10 +192,28 @@ draw_set_colour(c_white)
 var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
 if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
 if hover && mouse_check_button_pressed(mb_left) then {if global.hr24 = 0 then global.hr24 = 1 else global.hr24 = 0 } //if clicked then tell variable
+if !global.hr24 then { draw_set_alpha(0.5) }
 draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
 draw_set_alpha(1) //reset colour + alpha
 draw_set_colour(c_black)
 draw_text(xx,yy,string("ZOOM"))
+
+//EFFECT BUTTON
+
+var xx = mar*14
+var yy = mar*1
+var x_wide = ((mar*3.5)) //size
+var y_deep = (room_height/40) 
+
+draw_set_colour(c_white)
+var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+if hover && mouse_check_button_pressed(mb_left) then {alarm[2] = 2 ; if global.effect = 0 then global.effect = 1 else global.effect = 0 } //if clicked then tell variable
+if global.effect then { draw_set_alpha(0.5) }
+draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+draw_set_alpha(1) //reset colour + alpha
+draw_set_colour(c_black)
+draw_text(xx,yy,string("EFFECT"))
 
 
 
@@ -382,8 +400,8 @@ draw_line_width(xx,yy,xx,yy-(gsy*gs),7) //Draw vertical line
 
 //DRAW MINI GRID
 
-
-for(var ii=0; ii<gridsx_store/2; ii += 1) //draw grid along X axis
+var zmr2 = zmr/2
+for(var ii=0+(zmr2); ii<(zmr2)+gridsx_store/2; ii += 1) //draw grid along X axis
 	{		
 		for(var i=0; i<global.minig_y; i += 1) //draw grid along y axis
 			{	
@@ -406,7 +424,7 @@ for(var ii=0; ii<gridsx_store/2; ii += 1) //draw grid along X axis
 				col = make_color_rgb(c1,c2,c3)
 				draw_set_colour(col)
 				draw_set_alpha(a123)
-				draw_rectangle(mx+(mgs*ii)+1,my-(mgsy*i)+1,mx+mgs+(mgs*ii),my-(mgsy*(i+1)),0) //draw squares colours			
+				draw_rectangle(mx+(mgs*(ii-zmr2))+1,my-(mgsy*i)+1,mx+mgs+(mgs*(ii-zmr2)),my-(mgsy*(i+1)),0) //draw squares colours			
 				draw_set_colour(c_grey)
 				draw_set_alpha(0.4)					
 				draw_set_alpha(1)
@@ -416,7 +434,25 @@ for(var ii=0; ii<gridsx_store/2; ii += 1) //draw grid along X axis
 //DRAW NUMBER AXIS
 
 
-if AM_PM = 0 //if AM_PM is on 24hr mode
+if global.hr24 = 1 //if AM_PM is on 24hr mode
+	{
+		var gm = global.margin
+		var sx = global.startx-(global.startx/5)
+		var sy = global.starty
+		var hz = global.h_zero
+		var sz = global.gridsize
+		
+		for(var i=global.h_zero; i<24; i +=1) //draw numbers on axis
+			{
+				draw_text((sz*global.gridsx/24)*(i-hz)+sx,sy+(gm/2),string(i))
+			}
+		filled = 24 - global.h_zero //number of hours filled
+		for(var i=filled; i<24; i +=1) //draw numbers on axis
+			{
+				draw_text((sz*global.gridsx/24)*(i)+sx,sy+(gm/2),string(i-filled))
+			}
+	}
+else //CHANGE THIS TO ONLY DRAW ACTUAL VIEWABLE NUMBERS
 	{
 		var gm = global.margin
 		var sx = global.startx-(global.startx/5)
