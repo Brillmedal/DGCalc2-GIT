@@ -1,4 +1,5 @@
 done = 0
+g = 0
 ds = global.ds_grid //refer to grid
 t = 0 //time begins now
 cel = -1 //cell starts empty
@@ -8,3 +9,4 @@ max_list = global.max_list //max number of drugs on list
 global.count += 1
 mull = 0
 effect = global.effect
+line_c = make_color_rgb(0,0,0) //colour of line

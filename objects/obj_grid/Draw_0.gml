@@ -16,7 +16,10 @@ if global.next = 1 then
 	global.next = 0
 }
 
-
+if global.dosage > 1000 {global.dosage = 1000}
+if global.dosage < 0 {global.dosage = 0}
+current = scr_read(global.drug,1)
+file_text_close(file);
 
 
 //DRAW BACK+NEXT BUTTON
@@ -215,6 +218,53 @@ draw_set_alpha(1) //reset colour + alpha
 draw_set_colour(c_black)
 draw_text(xx,yy,string("EFFECT"))
 
+//LINE BUTTON
+
+var xx = mar*18
+var yy = mar*1
+var x_wide = ((mar*3)) //size
+var y_deep = (room_height/40) 
+
+draw_set_colour(c_white)
+var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+if hover && mouse_check_button_pressed(mb_left) then {alarm[2] = 2 ; global.select = 1; if global.lines = 0 then global.lines = 1 else global.lines = 0 } //if clicked then tell variable
+if global.lines then { draw_set_alpha(0.5) }
+draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+draw_set_alpha(1) //reset colour + alpha
+draw_set_colour(c_black)
+draw_text(xx,yy,string("LINES"))
+
+
+
+var xx = (room_width-global.menu_width)-(mar*16)
+var yy = mar*1
+var x_wide = (mar*16) //size
+var y_deep = room_height/40
+
+draw_set_colour(c_white)
+draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+draw_set_alpha(1) //reset colour + alpha
+draw_set_colour(c_black)
+var unt = global.unit //read unit vals
+if unt = 1 {unt = "mg"}
+if unt = 2 {unt = "ug"}
+if unt = 3 {unt = "g"}
+var hr_remain = (frac(global.hour)/0.25)*15 //remainder of the hour in  minutes
+var hr_floor = floor(global.hour) //the full hour integer
+if global.hour+global.h_zero < 24 then
+	{ //draw schedule stats before 24hrs
+		if hr_remain = 0 then draw_text_transformed(xx,yy,string(current) + " "+ string(global.dosage) + string(unt) + " " + string(hr_floor+global.h_zero) + ":00",1,1,0)
+		else
+			{	draw_text_transformed(xx,yy,string(current) + " "+ string(global.dosage) + + string(unt) + " " + string(hr_floor+global.h_zero) + ":" + string(hr_remain),1,1,0)	}
+	}
+
+else  //draw schedule after 24hrs
+	{ //draw schedule stats before 24hrs
+		if hr_remain = 0 then draw_text_transformed(xx,yy,string(current) + " "+ string(global.dosage) + string(unt) + " " + string(hr_floor+global.h_zero-24) + ":00",1,1,0)
+		else
+			{	draw_text_transformed(xx,yy,string(current) + " "+ string(global.dosage) + + string(unt) + " " + string(hr_floor+global.h_zero-24) + ":" + string(hr_remain),1,1,0)	}
+	}
 
 
 if global.page = 1
@@ -396,14 +446,6 @@ mgs = global.minigridsize
  //minigrid size y adjusted
 if global.hr24 = 0 then mgsy = global.minigridsize/2 else mgsy = global.minigridsize
 
-draw_set_color(c_black)
-draw_line_width(xx,yy,xx+(gsx*gs),yy,7) //Draw horizontal line
-draw_line_width(xx,yy,xx,yy-(gsy*gs),7) //Draw vertical line
-draw_set_color(c_grey)
-draw_set_alpha(0.4)
-draw_line_width(xx,yy,xx+(gsx*gs),yy,7) //Draw horizontal line
-draw_line_width(xx,yy,xx,yy-(gsy*gs),7) //Draw vertical line
-
 //DRAW MINI GRID
 
 var zmr2 = zmr/2
@@ -439,7 +481,7 @@ for(var ii=0+(zmr2); ii<(zmr2)+gridsx_store/2; ii += 1) //draw grid along X axis
 	
 //DRAW NUMBER AXIS
 
-
+draw_set_color(c_white)
 if global.hr24 = 1 //if AM_PM is on 24hr mode
 	{
 		var gm = global.margin
@@ -458,8 +500,7 @@ if global.hr24 = 1 //if AM_PM is on 24hr mode
 				draw_text((sz*global.gridsx/24)*(i)+sx,sy+(gm/2),string(i-filled))
 			}
 	}
-else //CHANGE THIS TO ONLY DRAW ACTUAL VIEWABLE NUMBERS //ONLY SHOW TOLERANCE WHEN EFFECT IS ON!!!!
-//////START HERE
+else
 	{
 		var gm = global.margin
 		var sx = global.startx-(global.startx/5)
@@ -565,65 +606,18 @@ if global.page = 2 //PAGE TWO SCHEDULE
 		draw_set_alpha(1) //reset colour + alpha
 		draw_set_colour(c_black)
 		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,1) //draw outline box
-		var hr = list[# 1,global.written-i]
-			if hr < 12 then
-	{
-		//if AM_PM = 1 then am_pm_cur = 1  else am_pm_cur = 0
-		am_pm_cur1 = 0
-	}
-	else 
-	{ 
-		//if AM_PM = 0 then am_pm_cur = 0  else am_pm_cur = 1
-		am_pm_cur1 = 1
-	}
-	
-
-		if AM_PM = 0 
-			{
-				 if am_pm_cur1 then 
-				{	
-					draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr-11) + "AM" ,1,1,0) //draw stats of drug
-				}
-				else
-				{	
-					draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr+1) + "PM" ,1,1,0) //draw stats of drug
-				}
+		var hr = (list[# 1,global.written-i])+global.h_zero
+		var hr_remain = (frac(hr)/0.25)*15 //remainder of the hour in  minutes
+		var hr_floor = floor(hr) //the full hour integer
+		if hr < 24 then
+			{ //draw schedule stats before 24hrs
+				draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr_floor) + ":" + string(hr_remain) ,1,1,0) //draw stats of drug
+				if hr_remain = 0 then draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr_floor) + ":00" ,1,1,0) //draw stats of drug
 			}
-			
-		if AM_PM = 1
+		else  //draw schedule after 24hrs
 			{
-				 if am_pm_cur1 then 
-				{	
-					draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr-11) + "PM" ,1,1,0) //draw stats of drug
-				}
-				else
-				{	
-					draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr+1) + "AM" ,1,1,0) //draw stats of drug
-				}
-			}
-			
-		if AM_PM = 2
-			{
-				 if am_pm_cur1 then 
-				{	
-					draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr+1) + ":00" ,1,1,0) //draw stats of drug
-				}
-				else
-				{	
-					draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr+1) + ":00" ,1,1,0) //draw stats of drug
-				}
-			}
-			
-		if AM_PM = 3
-			{
-				 if am_pm_cur1 then 
-				{	
-					draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr-11) + ":00" ,1,1,0) //draw stats of drug
-				}
-				else
-				{	
-					draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr+12) + ":00" ,1,1,0) //draw stats of drug
-				}
+				draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr_floor-24) + ":" + string(hr_remain) ,1,1,0) //draw stats of drug
+				if hr_remain = 0 then draw_text_transformed(xx,yy+(i*y_deep),string(dr) + " " + string(list[# 2,global.written-i]) + string(unt) + " " + string(hr_floor-24) + ":00" ,1,1,0) //draw stats of drug
 			}
 
 	}
@@ -650,7 +644,6 @@ if global.enter = 1
 if global.select = 1 then //if selected a box
 	{	
 		alarm[2] = 3 //double trigger select
-		//scr_sum() //recalculate totals
 		var inst_prev = inst //set memory of instance
 		if b_d = global.dosage then {same = 1} else {same = 0} //if bd is same as dosage now, tell this variable
 		b_d = scr_read(global.drug,2) //read temp base dosage
@@ -659,7 +652,6 @@ if global.select = 1 then //if selected a box
 		inst = scr_drug(global.drug,global.dosage,global.hour,global.tolerance,0); //create drug with asked dosage}
 		with (inst_prev) { instance_destroy(id) } //delete old one
 		global.select = 0 //reset select
-		//scr_sum()
 		alarm[1] = 2 //recalculate totals
 		
 		
@@ -681,7 +673,6 @@ if global.select = 1 then //if selected a box
 					var targ = list[# 4,T] //instance target reference
 					curr[i] = targ //set target from largest to smallest
 					ds_grid_set_region(list,1,T,5,T,-1) //clear row in question
-					//cleared = 1 //tell list has been cleared
 				}
 		}	
 		g_c = global.written
@@ -694,24 +685,11 @@ if global.select = 1 then //if selected a box
 			}
 		}
 	}
-	draw_text(1200,420,global.extend)
 	
-	//disable peak extension level when alarm has expired
+//disable peak extension level when alarm has expired
 if alarm[0] = -1 { alarm[0] = 1 }
 
 global.enter = 0
-//scr_draw_ds(list,50,50)
-
-//MINI GRID AXIS
-
-draw_set_color(c_black)
-draw_line_width(mx,my,mx+(mgx*mgs),my,7) //Draw horizontal line
-draw_line_width(mx,my,mx,my-(mgy*mgsy),7) //Draw vertical line
-draw_set_alpha(0.4)
-draw_set_color(c_grey)
-draw_line_width(mx,my,mx+(mgx*mgs),my,7) //Draw horizontal line
-draw_line_width(mx,my,mx,my-(mgy*mgsy),7) //Draw vertical line
-draw_set_alpha(1)
 
 
 //DRAW MENU BOXES
@@ -721,9 +699,8 @@ draw_rectangle(room_width-global.menu_width,0,room_width,room_height,0) //DRAW S
 draw_rectangle(0,0,room_width-(global.menu_width+1),global.bar_depth,0) //DRAW TOP MENU
 draw_set_alpha(1)
 
-draw_text(30,50,filled)
-draw_text(1200,420,global.extend)
-draw_text(1200,440,global.peaked)
-
-    draw_text(32, 32, global.zoom_hr);
-	 draw_text(32, 65, test);
+//draw_text(30,50,filled)
+//draw_text(1200,420,global.extend)
+//draw_text(1200,440,global.peaked)
+//draw_text(32, 32, global.zoom_hr);
+ draw_text(32, 65, global.unit);

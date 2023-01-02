@@ -30,11 +30,11 @@ if !file_exists("list1.txt") //if file doesn't exist
 		c += 1
 		file_text_write_string(file, "LSD");
 	    file_text_writeln(file);
-		file_text_write_real(file, "4");
+		file_text_write_real(file, "3");
 		file_text_writeln(file);
 		file_text_write_real(file, "70");
-		file_text_write_real(file, "25");
-		file_text_write_real(file, "5");
+		file_text_write_real(file, "20");
+		file_text_write_real(file, "10");
 		file_text_writeln(file);
 	    file_text_write_string(file, "100");
 		file_text_writeln(file);
@@ -70,7 +70,7 @@ if !file_exists("list1.txt") //if file doesn't exist
 		c += 1
 		file_text_write_string(file, "MDMA");
 	    file_text_writeln(file);
-		file_text_write_real(file, "11");
+		file_text_write_real(file, "7");
 		file_text_writeln(file);
 		file_text_write_real(file, "25");
 		file_text_write_real(file, "70");
@@ -78,32 +78,232 @@ if !file_exists("list1.txt") //if file doesn't exist
 		file_text_writeln(file);
 	    file_text_write_string(file, "150");
 		file_text_writeln(file);
-		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //1
 		file_text_write_real(file, "2");
-		file_text_write_real(file, "7");
+		file_text_write_real(file, "7"); //2
 		file_text_write_real(file, "8");
-		file_text_write_real(file, "7");
+		file_text_write_real(file, "7"); //3
 		file_text_write_real(file, "5");
-		file_text_write_real(file, "1");
+		file_text_write_real(file, "1"); //4
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //5
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //6
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //7
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //8
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //9
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //10
 		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //11
 		file_text_write_real(file, "0");
-		file_text_write_real(file, "0");
-		file_text_write_real(file, "0");
-		file_text_write_real(file, "0");
-		file_text_write_real(file, "0")
-		file_text_write_real(file, "0");
-		file_text_write_real(file, "0");
-		file_text_write_real(file, "0");;
-		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //12
 		file_text_write_real(file, "0");
 		file_text_writeln(file);
 		file_text_write_real(file, "1");
+		file_text_writeln(file);
+		file_text_writeln(file);
+		
+		c += 1
+		file_text_write_string(file, "4MMC");
+	    file_text_writeln(file);
+		file_text_write_real(file, "8");
+		file_text_writeln(file);
+		file_text_write_real(file, "20");
+		file_text_write_real(file, "75");
+		file_text_write_real(file, "5");
+		file_text_writeln(file);
+	    file_text_write_string(file, "200");
+		file_text_writeln(file);
+		file_text_write_real(file, "0"); //1
+		file_text_write_real(file, "3");
+		file_text_write_real(file, "7"); //2
+		file_text_write_real(file, "5");
+		file_text_write_real(file, "2"); //3
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "0"); //4
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //5
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //6
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //7
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //8
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //9
+		file_text_write_real(file, "0"); 
+		file_text_write_real(file, "0"); //10
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //11
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //12
+		file_text_write_real(file, "0");
+		file_text_writeln(file);
+		file_text_write_real(file, "1");
+		file_text_writeln(file);
+		file_text_writeln(file);
+		
+		c += 1
+		file_text_write_string(file, "2CB");
+	    file_text_writeln(file);
+		file_text_write_real(file, "4");
+		file_text_writeln(file);
+		file_text_write_real(file, "65");
+		file_text_write_real(file, "30");
+		file_text_write_real(file, "5");
+		file_text_writeln(file);
+	    file_text_write_string(file, "20");
+		file_text_writeln(file);
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "2");
+		file_text_write_real(file, "6");
+		file_text_write_real(file, "7");
+		file_text_write_real(file, "7");
+		file_text_write_real(file, "6");
+		file_text_write_real(file, "5");
+		file_text_write_real(file, "3");
+		file_text_write_real(file, "2");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //11
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //12
+		file_text_write_real(file, "0");
+		file_text_writeln(file);
+		file_text_write_real(file, "1");
+		file_text_writeln(file);
+		file_text_writeln(file);
+		
+		c += 1
+		file_text_write_string(file, "4FA");
+	    file_text_writeln(file);
+		file_text_write_real(file, "9");
+		file_text_writeln(file);
+		file_text_write_real(file, "20");
+		file_text_write_real(file, "75");
+		file_text_write_real(file, "5");
+		file_text_writeln(file);
+	    file_text_write_string(file, "200");
+		file_text_writeln(file);
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "2");
+		file_text_write_real(file, "6");
+		file_text_write_real(file, "7");
+		file_text_write_real(file, "6");
+		file_text_write_real(file, "6");
+		file_text_write_real(file, "6");
+		file_text_write_real(file, "4");
+		file_text_write_real(file, "3");
+		file_text_write_real(file, "2");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //11
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //12
+		file_text_write_real(file, "0");
+		file_text_writeln(file);
+		file_text_write_real(file, "1");
+		file_text_writeln(file);
+		file_text_writeln(file);
+		
+		c += 1
+		file_text_write_string(file, "Ket (Nasal)");
+	    file_text_writeln(file);
+		file_text_write_real(file, "2");
+		file_text_writeln(file);
+		file_text_write_real(file, "20");
+		file_text_write_real(file, "10");
+		file_text_write_real(file, "70");
+		file_text_writeln(file);
+	    file_text_write_string(file, "60");
+		file_text_writeln(file);
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "6");
+		file_text_write_real(file, "3");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //11
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //12
+		file_text_write_real(file, "0");
+		file_text_writeln(file);
+		file_text_write_real(file, "1");
+		file_text_writeln(file);
+		file_text_writeln(file);
+		
+		c += 1
+		file_text_write_string(file, "Shrooms");
+	    file_text_writeln(file);
+		file_text_write_real(file, "1");
+		file_text_writeln(file);
+		file_text_write_real(file, "80");
+		file_text_write_real(file, "10");
+		file_text_write_real(file, "10");
+		file_text_writeln(file);
+	    file_text_write_string(file, "2");
+		file_text_writeln(file);
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "4");
+		file_text_write_real(file, "8");
+		file_text_write_real(file, "7");
+		file_text_write_real(file, "5");
+		file_text_write_real(file, "3");
+		file_text_write_real(file, "2");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "1");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //11
+		file_text_write_real(file, "0");
+		file_text_write_real(file, "0"); //12
+		file_text_write_real(file, "0");
+		file_text_writeln(file);
+		file_text_write_real(file, "3");
 		file_text_writeln(file);
 		file_text_writeln(file);
 

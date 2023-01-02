@@ -23,7 +23,8 @@ if done != 1 //if not done
 									c_array[3] += psych //add colour values
 									c_array[4] += stim
 									c_array[5] += diss	
-									c_array[6] += 1		
+									c_array[6] += 1	
+									line_c = make_color_rgb(psych,stim,diss) //colour of line
 								}
 							else //if choose to display colours over effect
 								{ 
@@ -34,6 +35,7 @@ if done != 1 //if not done
 									c_array[4] += green
 									c_array[5] += blue	
 									c_array[6] += 1		
+									line_c = make_color_rgb(red,green,blue) //colour of line
 								}
 					
 						}

@@ -24,6 +24,7 @@ if file_exists("list.txt") //if file exists
 	if pl = 2 {return b_dosage}
 	T0 = file_text_read_real(file) 
 	if T0 > 0 then {length += 1}
+	if T0 = 0 then T0 = 0.2 //this is so line can be drawn and appears above zero
 	T1 = file_text_read_real(file)
 	if T1 > 0 then {length += 1}
 	T2 = file_text_read_real(file)
