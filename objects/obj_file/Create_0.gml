@@ -353,3 +353,5 @@ file_text_close(file);
 
 }
 instance_create_depth(x,y,-1,obj_grid)
+instance_create_depth(x,y,-1,obj_start)
+instance_create_depth(x,y,-1,obj_end)

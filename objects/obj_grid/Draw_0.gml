@@ -124,9 +124,8 @@ if global.clear = 1 //RESET INSTANCES
 			//global.select = 1
 			inst = scr_drug(global.drugs_max,0,0,1,0)
 			global.clear = 0
-			alarm[1] = 2 //recalculate select
-			
-			//scr_save(global.preset)
+			alarm[1] = 2 //recalculate select			
+			scr_save(global.preset)
 		}
 		
 //shift hours over left
@@ -236,6 +235,24 @@ draw_set_colour(c_black)
 draw_text(xx,yy,string("LINES"))
 
 
+//INDICATOR BUTTON
+
+var xx = mar*21.5
+var yy = mar*1
+var x_wide = ((mar*5)) //size
+var y_deep = (room_height/40) 
+
+draw_set_colour(c_white)
+var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+if hover && mouse_check_button_pressed(mb_left) then {if global.indicator = 0 then global.indicator = 1 else global.indicator = 0 } //if clicked then tell variable
+if global.indicator then { draw_set_alpha(0.5) }
+draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+draw_set_alpha(1) //reset colour + alpha
+draw_set_colour(c_black)
+draw_text(xx,yy,string("INDICATOR"))
+
+//DISPLAY BOX
 
 var xx = (room_width-global.menu_width)-(mar*16)
 var yy = mar*1
@@ -275,9 +292,9 @@ if global.page = 1
 	
 	
 	var xx = (room_width-global.menu_width)+mar
-	var yy = global.bar_depth + (y_deep*2.5)
-	var x_wide = ((global.menu_width-(mar*2))/4) //size
-	var y_deep = room_height/40
+	var yy = room_height-(global.bar_depth*2) 
+	var x_wide = ((global.menu_width-(mar*2))) //size
+	var y_deep = room_height/20
 	draw_set_colour(c_white)
 	var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy+(y_deep),xx+x_wide,yy+(y_deep)+y_deep)
 	if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
@@ -288,7 +305,195 @@ if global.page = 1
 	draw_text_transformed(xx+2,yy+(y_deep),"ENTER",1,1,0) //draw base dosage of drug	
 	
 	
+	//DRAW PLUS DOSAGE
+	
+	var x_wide = (global.menu_width/2)-(mar*1) //size
+	var y_deep = room_height/15
+	var xx = (room_width-global.menu_width)+mar //starting position of selection boxes
+	var yy = global.bar_depth + (y_deep*1)
+	
+	draw_set_color(c_white)
+	draw_text(xx,yy-y_deep, "DOSAGE")
+	
+	for(var i=0; i<3; i += 1) //create list
+	{
+		draw_set_colour(c_white)
+		var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep)
+		if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+		if hover && mouse_check_button_pressed(mb_left) then
+		{
+			if global.unit = 3
+			{
+				if i = 0 then  global.dosage += 0.01
+				if i = 1 then  global.dosage += 0.1
+				if i = 2 then  global.dosage += 1
+			}
+			else
+			{
+				if i = 0 then  global.dosage += 1
+				if i = 1 then  global.dosage += 10
+				if i = 2 then  global.dosage += 100
+			}
+			
+			if global.dosage > 1000 {global.dosage = 1000}
+			if global.dosage < 0 {global.dosage = 0}
+
+		global.select = 1
+		} //if clicked then tell variable
+		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
+		draw_set_alpha(1) //reset colour + alpha
+		draw_set_colour(c_black)
+		if global.unit = 3
+		{
+			if i = 0 then  draw_text_transformed(xx,yy+(i*y_deep),string("+0.01"),1,1,0) //draw name of drug	
+			if i = 1 then  draw_text_transformed(xx,yy+(i*y_deep),string("+0.1"),1,1,0) //draw name of drug	
+			if i = 2 then  draw_text_transformed(xx,yy+(i*y_deep),string("+1"),1,1,0) //draw name of drug	
+		}
+		else
+		{
+			if i = 0 then  draw_text_transformed(xx,yy+(i*y_deep),string("+1"),1,1,0) //draw name of drug	
+			if i = 1 then  draw_text_transformed(xx,yy+(i*y_deep),string("+10"),1,1,0) //draw name of drug	
+			if i = 2 then  draw_text_transformed(xx,yy+(i*y_deep),string("+100"),1,1,0) //draw name of drug
+		}
+		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,1) //draw outline box
+	}
+		
+
+	//DRAW MINUS DOSAGE
+	var xx = xx+x_wide //starting position of selection boxes
+	var y_deep = room_height/15
+	var yy = global.bar_depth + (y_deep*1)
+
+	for(var i=0; i<3; i += 1) //create list
+	{
+		draw_set_colour(c_white)
+		var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep)
+		if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+		if hover && mouse_check_button_pressed(mb_left) then
+		{
+			if global.unit = 3
+			{
+				if i = 0 then  global.dosage -= 0.01
+				if i = 1 then  global.dosage -= 0.1
+				if i = 2 then  global.dosage -= 1
+			}
+			else
+			{
+				if i = 0 then  global.dosage -= 1
+				if i = 1 then  global.dosage -= 10
+				if i = 2 then  global.dosage -= 100
+			}
+		if global.dosage > 1000 {global.dosage = 1000}
+		if global.dosage < 0 {global.dosage = 0}
+		global.select = 1
+		} //if clicked then tell variable
+		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
+		draw_set_alpha(1) //reset colour + alpha
+		draw_set_colour(c_black)
+		if global.unit = 3
+		{
+			if i = 0 then  draw_text_transformed(xx,yy+(i*y_deep),string("-0.01"),1,1,0) //draw name of drug	
+			if i = 1 then  draw_text_transformed(xx,yy+(i*y_deep),string("-0.1"),1,1,0) //draw name of drug	
+			if i = 2 then  draw_text_transformed(xx,yy+(i*y_deep),string("-1"),1,1,0) //draw name of drug
+		}
+		else
+		{
+		if i = 0 then  draw_text_transformed(xx,yy+(i*y_deep),string("-1"),1,1,0) //draw name of drug	
+		if i = 1 then  draw_text_transformed(xx,yy+(i*y_deep),string("-10"),1,1,0) //draw name of drug	
+		if i = 2 then  draw_text_transformed(xx,yy+(i*y_deep),string("-100"),1,1,0) //draw name of drug	
+		}
+		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,1) //draw outline box
+	} 
+
+
+
+//DRAW HOURS LEFT
+	var yy = global.bar_depth + (y_deep*5)
+	var x_wide = (global.menu_width/2)-(mar*3) //size
+	var y_deep = room_height/25
+	var xx = (room_width-global.menu_width)+mar //starting position of selection boxes
+
+draw_set_color(c_white)
+draw_text(xx,yy-(y_deep/1.2), "TIME")
+	
+	for(var i=0; i<12; i += 1) //create list
+	{
+		draw_set_colour(c_white)
+		var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep)
+		if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+		if hover && mouse_check_button_pressed(mb_left) then
+		{		
+		alarm[5] = 3
+		var iz = i-global.h_zero //calc what to set hour to based on zero
+		if iz < 0 then { iz += 24 }
+		global.hour=iz
+		//show_message(iz)
+		} //if clicked then tell variable
+		if i = floor(global.hour)+global.h_zero then { draw_set_alpha(0.5) }
+		if i+24 = floor(global.hour)+global.h_zero then { draw_set_alpha(0.5) }
+		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
+		draw_set_alpha(1) //reset colour + alpha
+		draw_set_colour(c_black)
+		draw_text_transformed(xx,yy+(i*y_deep),(string(i)) + ":00",1,1,0) //draw hour text
+		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,1) //draw outline box
+	}
+	
+//DRAW HOURS RIGHT
+	var xx = (room_width-global.menu_width)+mar+x_wide+px_mar //starting position of selection boxes
+
+	
+	for(var i=0; i<12; i += 1) //create list
+	{
+		draw_set_colour(c_white)
+		var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep)
+		if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+		if hover && mouse_check_button_pressed(mb_left) then
+		{		
+		alarm[5] = 1
+		var iz = (i-global.h_zero)+12 //calc what to set hour to based on zero
+		if iz < 0 then { iz += 24 }
+		global.hour=iz
+		//show_message(iz)
+		} //if clicked then tell variable
+		if i+12 = floor(global.hour)+global.h_zero then { draw_set_alpha(0.5) }
+		if i+36 = floor(global.hour)+global.h_zero then { draw_set_alpha(0.5) }
+		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
+		draw_set_alpha(1) //reset colour + alpha
+		draw_set_colour(c_black)
+		draw_text_transformed(xx,yy+(i*y_deep),(string(i+12)) + ":00",1,1,0) //draw hour text
+		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,1) //draw outline box
+	}
+
+	
+	//Plus 15 min
+	var xx = xx + x_wide + px_mar
+	var yy = (yy-y_deep)+(px_mar/2)+y_deep
+	var y_deep = (y_deep*6)-px_mar
+	var x_wide = (global.menu_width/3)-(mar*1.5) //size
+	draw_set_colour(c_white)
+	var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+	if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+	if hover && mouse_check_button_pressed(mb_left) then	{ if global.hour < 23.5 then { global.hour += 0.25 }; global.select = 1 } //if clicked then tell variable
+	draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+	draw_set_alpha(1) //reset colour + alpha
+	draw_set_colour(c_black)
+	draw_text_transformed(xx+2,yy,"+15 MIN",1,1,0) //draw base dosage of drug	
+	
+	//Minus 15 min
+	var yy = yy+y_deep +px_mar
+	draw_set_colour(c_white)
+	var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+	if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+	if hover && mouse_check_button_pressed(mb_left) then	{ if global.hour > 0 then { global.hour -= 0.25 }; global.select = 1 } //if clicked then tell variable
+	draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+	draw_set_alpha(1) //reset colour + alpha
+	draw_set_colour(c_black)
+	draw_text_transformed(xx+2,yy,"-15 MIN",1,1,0) //draw base dosage of drug	
+	
+
+	
 }
+
 if global.page !=2
 
 {
@@ -555,11 +760,11 @@ if global.page = 2 //PAGE TWO SCHEDULE
 			
 			if alarm[1] = -1
 			{
-				if i = 0 then { global.preset = 1; scr_load(1); alarm[1] = 15 }
-				if i = 1 then { global.preset = 2; scr_load(2); alarm[1] = 15 }
-				if i = 2 then { global.preset = 3; scr_load(3); alarm[1] = 15 }
-				if i = 3 then { global.preset = 4; scr_load(4); alarm[1] = 15 }
-				if i = 4 then { global.preset = 5; scr_load(5); alarm[1] = 15 }
+				if i = 0 then { global.preset = 1; scr_load(1); alarm[3] = 15 }
+				if i = 1 then { global.preset = 2; scr_load(2); alarm[3] = 15 }
+				if i = 2 then { global.preset = 3; scr_load(3); alarm[3] = 15 }
+				if i = 3 then { global.preset = 4; scr_load(4); alarm[3] = 15 }
+				if i = 4 then { global.preset = 5; scr_load(5); alarm[3] = 15 }
 			}
 			
 		}
@@ -600,6 +805,7 @@ if global.page = 2 //PAGE TWO SCHEDULE
 			global.tolerance = tar.tolerance
 			global.select = 1;
 			instance_destroy(tar);	
+			scr_save(global.preset)
 			break
 			} 
 		draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
@@ -630,13 +836,12 @@ if global.enter = 1
 {
 	if global.count < (max_list-1)
 		{
-			//scr_sum()
 			alarm[1] = 2 //recalculate totals
 			inst = undefined;
 			global.select = 1;
 			global.drug = global.drugs_max;
 			global.tolerance = 1; 
-			//scr_save(global.preset)
+			scr_save(global.preset)
 		}		
 }
 
@@ -691,6 +896,10 @@ if alarm[0] = -1 { alarm[0] = 1 }
 
 global.enter = 0
 
+if loaded = 0 then { alarm[4] = 4; loaded = 1 }
+	
+	
+
 
 //DRAW MENU BOXES
 draw_set_color(c_grey)
@@ -703,4 +912,4 @@ draw_set_alpha(1)
 //draw_text(1200,420,global.extend)
 //draw_text(1200,440,global.peaked)
 //draw_text(32, 32, global.zoom_hr);
- draw_text(32, 65, global.unit);
+//draw_text(32, 65, global.hour);

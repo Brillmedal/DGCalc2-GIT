@@ -1,0 +1,1 @@
+global.select = 1

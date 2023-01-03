@@ -20,6 +20,7 @@ global.h_zero = 7 //starting hour for axis
 global.zoom_hr = 0 //starting hour for zoom focus
 global.extend = 0
 global.lines = 0
+global.indicator = 0
 global.ext_height = 1.2 //percentage to increase height on extension
 global.ext_len = 1.3
 global.peak_height = 0.9 //percentage of height to be considered a peak
