@@ -26,8 +26,8 @@ global.ext_len = 1.3
 global.peak_height = 0.9 //percentage of height to be considered a peak
 global.peak_percentage = 0.35//percentage of x axis required to be at peak
 global.peaked = 0 //init
-global.p_tol_constant = 0.0000011//constant to lower subsequent effects by
-global.s_tol_constant = 0.0000014 //constant to lower subsequent effects by
+global.p_tol_constant = 0.0000018//constant to lower subsequent effects by
+global.s_tol_constant = 0.0000016 //constant to lower subsequent effects by
 global.d_tol_constant = 0.0000004 //constant to lower subsequent effects by
 
 
