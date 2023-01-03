@@ -44,4 +44,3 @@ list[# 3,cel] = -1
 list[# 4,cel] = -1
 global.written -= 1
 }
-//scr_sum() //recalculate totals
