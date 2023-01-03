@@ -67,7 +67,7 @@ periods of time.
 If you completely cock it up, delete the file and it will be recreated from scratch (but remember you will lose 
 your custom chems), you could always save different versions as backups.
 
-**The unit given will change the dosage increments in addition to their display in the schedule so it's worth doing**
+**The unit given will change the dosage increments in addition to their display in the schedule so it's worth doing (EG G, mg or ug)**
 
 ## THE INTERFACE
 
