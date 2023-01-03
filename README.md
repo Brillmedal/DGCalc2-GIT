@@ -14,7 +14,7 @@ and I don't have to learn new Java or Python syntax. for this reason it will wor
 as I am unable myself to let it work on other operating systems. Maybe someone will take over and create
 a superior version to port over; who knows.
 
-![This is an image](https://media4.giphy.com/media/cMl6Y94xI2n6tMhcTg/giphy.gif?cid=790b76113bff182df4241406093c94b51c6abd9df7ae1e6c&rid=giphy.gif&ct=g)
+![This is a gif](https://media4.giphy.com/media/IWXj1tCDis9BVF33yd/giphy.gif?cid=790b7611264964a97b9478c072aa7de2f9678b5f3b8f6b8d&rid=giphy.gif&ct=g)
 
 ## HOW DO I INSTALL/USE THIS + TOO LONG DIDN'T READ
 
