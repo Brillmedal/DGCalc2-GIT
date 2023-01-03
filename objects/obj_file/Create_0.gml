@@ -8,7 +8,7 @@ if !file_exists("5.txt") { var p5 = file_text_open_write(working_directory + "5.
 
 var c = 0 //begin count
 
-if !file_exists("list1.txt") //if file doesn't exist
+if !file_exists("list.txt") //if file doesn't exist
 {	
 
 	var file = file_text_open_write(working_directory + "list.txt");
