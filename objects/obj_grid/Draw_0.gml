@@ -252,6 +252,25 @@ draw_set_alpha(1) //reset colour + alpha
 draw_set_colour(c_black)
 draw_text(xx,yy,string("INDICATOR"))
 
+		//help button
+		
+var xx = mar*27
+var yy = mar*1
+var x_wide = ((mar*3)) //size
+var y_deep = (room_height/40) 
+
+	draw_set_colour(c_white)
+	var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
+	if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+	if hover && mouse_check_button_pressed(mb_left) then 
+		{
+		url_open("https://github.com/Brillmedal/DGCalc2-GIT/blob/main/README.md")  //if clicked then tell variable}
+		}
+	draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+	draw_set_alpha(1) //reset colour + alpha
+	draw_set_colour(c_black)
+	draw_text(xx+2,yy,"HELP")
+
 //DISPLAY BOX
 
 var xx = (room_width-global.menu_width)-(mar*16)
