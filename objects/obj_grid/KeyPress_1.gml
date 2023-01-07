@@ -51,15 +51,15 @@ if keyboard_check_direct(vk_shift) then
 
 if alarm[3] = -1
 {
-	if keyboard_check_pressed(ord("1")) ^^ keyboard_check_pressed(vk_numpad1) then {global.preset = 1; scr_load(1); alarm[1] = 15}
+	if keyboard_check_pressed(ord("1")) ^^ keyboard_check_pressed(vk_numpad1) then {global.preset = 1; scr_load(1); alarm[3] = 12}
 	else
-		{ if keyboard_check_pressed(ord("2")) ^^ keyboard_check_pressed(vk_numpad2) then {global.preset = 2; scr_load(2); alarm[1] = 15}
+		{ if keyboard_check_pressed(ord("2")) ^^ keyboard_check_pressed(vk_numpad2) then {global.preset = 2; scr_load(2); alarm[3] = 12}
 			else
-				{ if keyboard_check_pressed(ord("3")) ^^ keyboard_check_pressed(vk_numpad3) then {global.preset = 3; scr_load(3); alarm[1] = 15}
+				{ if keyboard_check_pressed(ord("3")) ^^ keyboard_check_pressed(vk_numpad3) then {global.preset = 3; scr_load(3); alarm[3] = 12}
 					else
-						{ if keyboard_check_pressed(ord("4")) ^^ keyboard_check_pressed(vk_numpad4) then {global.preset = 4; scr_load(4); alarm[1] = 15}
+						{ if keyboard_check_pressed(ord("4")) ^^ keyboard_check_pressed(vk_numpad4) then {global.preset = 4; scr_load(4); alarm[3] = 12}
 							else
-								{ if keyboard_check_pressed(ord("5")) ^^ keyboard_check_pressed(vk_numpad5) then {global.preset = 5; scr_load(5); alarm[1] = 15}
+								{ if keyboard_check_pressed(ord("5")) ^^ keyboard_check_pressed(vk_numpad5) then {global.preset = 5; scr_load(5); alarm[3] = 12}
 							}
 						}
 				}

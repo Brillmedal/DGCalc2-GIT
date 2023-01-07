@@ -4,9 +4,8 @@ function scr_globals()
 //constants
 global.m = 2.5 //multiplier to times drug colour percentages by
 global.base = 400	//number to base 255 value on
-global.mini_base = 255 //number to base mini grid 255value on
-global.synergy = 0.08 //percentage to decrease per entry 
 global.synergymax = 6 //how many max combos on synergy
+global.ext_height = 1.2 //percentage to increase height on extension
 
 global.drugs_max = 30
 global.drug = global.drugs_max
@@ -21,15 +20,7 @@ global.zoom_hr = 0 //starting hour for zoom focus
 global.extend = 0
 global.lines = 0
 global.indicator = 0
-global.ext_height = 1.2 //percentage to increase height on extension
-global.ext_len = 1.3
-global.peak_height = 0.9 //percentage of height to be considered a peak
-global.peak_percentage = 0.35//percentage of x axis required to be at peak
 global.peaked = 0 //init
-global.p_tol_constant = 0.0000018//constant to lower subsequent effects by
-global.s_tol_constant = 0.0000016 //constant to lower subsequent effects by
-global.d_tol_constant = 0.0000004 //constant to lower subsequent effects by
-
 
 
 global.max_list = 22 //max no of entries at once

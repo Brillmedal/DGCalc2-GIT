@@ -779,11 +779,11 @@ if global.page = 2 //PAGE TWO SCHEDULE
 			
 			if alarm[1] = -1
 			{
-				if i = 0 then { global.preset = 1; scr_load(1); alarm[3] = 15 }
-				if i = 1 then { global.preset = 2; scr_load(2); alarm[3] = 15 }
-				if i = 2 then { global.preset = 3; scr_load(3); alarm[3] = 15 }
-				if i = 3 then { global.preset = 4; scr_load(4); alarm[3] = 15 }
-				if i = 4 then { global.preset = 5; scr_load(5); alarm[3] = 15 }
+				if i = 0 then { global.preset = 1; scr_load(1); alarm[3] = 12 }
+				if i = 1 then { global.preset = 2; scr_load(2); alarm[3] = 12 }
+				if i = 2 then { global.preset = 3; scr_load(3); alarm[3] = 12 }
+				if i = 3 then { global.preset = 4; scr_load(4); alarm[3] = 12 }
+				if i = 4 then { global.preset = 5; scr_load(5); alarm[3] = 12 }
 			}
 			
 		}
@@ -927,7 +927,7 @@ draw_rectangle(room_width-global.menu_width,0,room_width,room_height,0) //DRAW S
 draw_rectangle(0,0,room_width-(global.menu_width+1),global.bar_depth,0) //DRAW TOP MENU
 draw_set_alpha(1)
 
-//draw_text(30,50,filled)
+//draw_text(30,50,global.peak_percentage)
 //draw_text(1200,420,global.extend)
 //draw_text(1200,440,global.peaked)
 //draw_text(32, 32, global.zoom_hr);

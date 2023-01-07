@@ -9,6 +9,7 @@
     {"id":{"name":"scr_save","path":"scripts/scr_save/scr_save.yy",},"order":9,},
     {"id":{"name":"scr_draw_ds","path":"scripts/scr_draw_ds/scr_draw_ds.yy",},"order":8,},
     {"id":{"name":"scr_colour","path":"scripts/scr_colour/scr_colour.yy",},"order":6,},
+    {"id":{"name":"scr_read_const","path":"scripts/scr_read_const/scr_read_const.yy",},"order":11,},
     {"id":{"name":"obj_grid","path":"objects/obj_grid/obj_grid.yy",},"order":0,},
     {"id":{"name":"scr_load","path":"scripts/scr_load/scr_load.yy",},"order":10,},
     {"id":{"name":"scr_read","path":"scripts/scr_read/scr_read.yy",},"order":4,},
