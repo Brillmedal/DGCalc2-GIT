@@ -21,7 +21,7 @@ if !file_exists("list.txt") //if file doesn't exist
 		file_text_writeln(file);
 	    file_text_write_string(file, "BASE DOSAGE");
 		file_text_writeln(file);
-		file_text_write_string(file, "INTENSITY BY HOUR T0 T1 T2 T3 T4... T19 T20");
+		file_text_write_string(file, "INTENSITY BY HOUR T0 T1 T2 T3 T4... T22 T23");
 		file_text_writeln(file);
 		file_text_write_string(file, "UNIT (1=mg, 2=ug, 3=g");
 		file_text_writeln(file);
