@@ -129,6 +129,14 @@ the text files associated.
 The schedule will order itself chronologically so no need to worry and the timestamp will 
 change depending on settings. **You can click on these individually to edit or delete**
 
+### EDIT CONSTANTS
+
+I've made some of the parameters avaliable to edit in the "Constants.txt" file found in the same local folder.
+Slight descriptions on there though really it's hard to explain exactly what they do, if you want to play around just edit, save + relaunch.
+If you think you've cocked it up or can't remember the default then delete the file and it will be recreated to default settings.
+If you want to disable effect decay then set those values to zero, or if you want to disable the drug synergy then set to zero. I can't see why you would want to change most of these but at least you have the opportunity if you dont like the how they adjust the results.
+
+
 ## CONTROLS 
 ```
 LEFT/RIGHT = HOURS
