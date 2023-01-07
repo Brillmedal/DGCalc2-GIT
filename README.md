@@ -34,7 +34,7 @@ DRUG NAME
 COLOUR
 PSYCHEDELIC/STIMULATING/DISSOCIATING, (percentage must add up to 100%)
 BASE DOSAGE
-INTENSITY BY HOUR T0 T1 T2 T3 T4... T19 T20
+INTENSITY BY HOUR T0 T1 T2 T3 T4... T22 T23
 UNIT (1=mg, 2=ug, 3=g)
 ```
 Using this file you can create up to 30 custom drug profiles
