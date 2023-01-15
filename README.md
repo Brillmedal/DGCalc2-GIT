@@ -10,17 +10,22 @@ overall intensity and several preset days, plenty of keyboard shortcuts, some in
 an ordered schedule, and can change time formats to suit.
 
 It was built in gamemaker since that's the only language I know, which is C based but has a nice GUI
-and I don't have to learn new Java or Python syntax. for this reason it will work for now only on WINDOWS
-as I am unable myself to let it work on other operating systems. Maybe someone will take over and create
-a superior version to port over; who knows.
+and I don't have to learn new Java or Python syntax. It was written for windows and I've also managed to export to mac
 
 ![This is a gif](https://media4.giphy.com/media/IWXj1tCDis9BVF33yd/giphy.gif?cid=790b7611264964a97b9478c072aa7de2f9678b5f3b8f6b8d&rid=giphy.gif&ct=g)
 
 ## HOW DO I INSTALL/USE THIS + TOO LONG DIDN'T READ
 
-**Download the DSGCalc2.rar file and extract anywhere you like, open the DGCCalc2.exe and the program will launch Enter your drug, dosage, the time you plan to take it and hit enter. The entry will appear on the last page on the right, chronologically listed. To edit entries click on the specific one, adpat and hit enter again, or to delete just click and don't re-submit. The schedules are saved to file automatically and to clear a preset just press escape or hit clear. You can use the arrow keys to change hour and dosage, or hold shift and arrows to change drug/incremental dosage. numbers 1-5 change presets. Enjoy.**
+### Windows
+
+**Download the DSGCalc2-WINDOWS.rar file and extract anywhere you like, open the DGCCalc2.exe and the program will launch. Enter your drug, dosage, the time you plan to take it and hit enter. The entry will appear on the last page on the right, chronologically listed. To edit entries click on the specific one, adapt and hit enter again, or to delete just click and don't re-submit. The schedules are saved to file automatically and to clear a preset just press escape or hit clear. You can use the arrow keys to change hour and dosage, or hold shift and arrows to change drug/incremental dosage. numbers 1-5 change presets. Enjoy.**
 **Add your custom drugs by going to %USERNAME%/appdata/local/DSGalc2/list.txt edit, save + relaunch. You can copy other people's text files or custom drugs and paste in, if it stops working or crashes you may have messed up the order, delete the file and it will recreate itself from default**
 
+### Mac
+
+**Download the DSGCalc2-MAC.rar file and extract anywhere you like, open the DGCCalc2.app and since it's not signed with dev certificates (I'm not paying $100 to do this) you'll have to try launch first from the finder, ctrl-click the app and hit open. It may pop up and warn you it's not signed and you may have to go to the security centre to make an exception for the program. It should open fine from here onwards (I assume, I don't have a mac).
+The program will launch, Enter your drug, dosage, the time you plan to take it and hit enter. The entry will appear on the last page on the right, chronologically listed. To edit entries click on the specific one, adapt and hit enter again, or to delete just click and don't re-submit. The schedules are saved to file automatically and to clear a preset just press escape or hit clear. You can use the arrow keys to change hour and dosage, or hold shift and arrows to change drug/incremental dosage. numbers 1-5 change presets. Enjoy.**
+**Add your custom drugs by going to Users/%USERNAME%/Library/Application Support/%APP ID%/list.txt edit, save + relaunch. You can copy other people's text files or custom drugs and paste in, if it stops working or crashes you may have messed up the order, delete the file and it will recreate itself from default**
 
 ## WHAT ARE THE AXIS?
 
@@ -154,4 +159,4 @@ ESC = CLEAR
 everything I've come into contact with yet, though i'm sure things have slipped through the net.
 
 
--If in doubt, delete all the text files in Users/%USERNAME%/appdata/local/DSGalc2 and they will be recreated fresh on startup, but you will lose your list file so if there's anything you want to keep, save a backup.
+-If in doubt, delete all the text files in Users/%USERNAME%/appdata/local/DSGalc2 or Users/%USERNAME%/Library/Application Support/%APP ID% and they will be recreated fresh on startup, but you will lose your list file so if there's anything you want to keep, save a backup.
