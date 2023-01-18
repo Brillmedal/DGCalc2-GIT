@@ -19,6 +19,10 @@ xx = 0
 yy = 0
 gs = 0
 gridsx_store = 0
+shift = 0
+reset = 0
+editing = 0
+str = ""
 
 draw_set_font(fnt_default);
 scr_sum() //calculate totals

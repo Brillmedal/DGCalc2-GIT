@@ -21,6 +21,8 @@ global.extend = 0
 global.lines = 0
 global.indicator = 0
 global.peaked = 0 //init
+global.edit = 0
+global.reset = 0
 
 
 global.max_list = 22 //max no of entries at once
