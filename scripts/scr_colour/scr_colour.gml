@@ -1,6 +1,5 @@
-function scr_colour()
+function scr_colour(argument0)
 {
-	
 if colour = 1 then { red = 100; green = 0; blue = 0 } //RED
 if colour = 2 then { red = 67; green = 33; blue = 0 } //ORANGE
 if colour = 3 then { red = 50; green = 50; blue = 0 } //YELLOW

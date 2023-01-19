@@ -124,7 +124,7 @@ var x_wide = global.menu_width-(mar*2) //size
 draw_set_colour(c_white)
 var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
 if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
-if hover && mouse_check_button_pressed(mb_left) then { if global.edit = 1 then global.edit = 0 else global.edit = 1 ; reset = 0; global.select = 1;} //if clicked then tell variable
+if hover && mouse_check_button_pressed(mb_left) then { if global.edit = 1 then global.edit = 0 else global.edit = 1 ; reset = 0; global.select = 1; error = 0} //if clicked then tell variable
 draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
 draw_set_alpha(1) //reset colour + alpha
 draw_set_colour(c_black)
@@ -137,6 +137,7 @@ else
 //SAVE AND EDIT
 if global.edit = 1
 {
+
 	//EDIT BUTTON
 	
 	if editing = 0
@@ -169,7 +170,22 @@ if global.edit = 1
 		draw_set_colour(c_white)
 		var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
 		if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
-		if hover && mouse_check_button_pressed(mb_left) then { scr_copyfile(); file_text_close(filecopy); file_text_close(file1); editing = 0 } //if clicked then tell variable
+		if hover && mouse_check_button_pressed(mb_left) then 
+			{
+					//ERROR MESSAGES
+				if total_effect != 100 then error =1	
+				{
+					if total_effect = 0 then error = 0
+				}
+				
+				if error != 1
+				{
+					scr_copyfile();
+					file_text_close(filecopy);
+					file_text_close(file1);
+					editing = 0
+				}
+			} //if clicked then tell variable
 		draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
 		draw_set_alpha(1) //reset colour + alpha
 		draw_set_colour(c_black)
@@ -382,7 +398,18 @@ if global.edit = 1
 				}
 				
 				
-				
+			
+			
+			if error then 
+			
+			{ 				
+				draw_set_colour(c_red)
+				var yy = room_height-(mar*5)
+				var xx = (room_width-global.menu_width)+mar //starting position of selection boxes
+				draw_text(xx,yy,"Effects must total 100% or 0%")
+				if total_effect = 100 then error = 0
+			}
+			
 			}
 		
 		//PSYCH BUTTONS
@@ -395,7 +422,7 @@ if global.edit = 1
 		draw_set_colour(c_white)
 		draw_set_alpha(1) //reset colour + alpha
 		draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
-		draw_text(xx,yy-y_deep,string("Psychedelic"))	
+		draw_text(xx,yy-y_deep,string("Psychedelic (%)"))	
 		draw_set_colour(c_black)		
 		if !editing //if not editing then set file name as text
 			{
@@ -421,9 +448,12 @@ if global.edit = 1
 
 							if i = 0 then  psych_edit += 1
 							if i = 1 then  psych_edit += 10
-							//total_effect = psych + stim + diss
-							//if  > 1000 {b_d = 1000}
-							//if b_d < 0 {b_d = 0}
+							total_effect = psych_edit + stim_edit + diss_edit
+							other_effect = stim_edit + diss_edit
+							if total_effect > 100 then psych_edit = 100-other_effect //if total is greater than 100
+							if psych_edit < 0 then psych_edit = 0 //if less than zero set to zero
+							total_effect = psych_edit + stim_edit + diss_edit
+							
 					}
 					draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
 					draw_set_alpha(1) //reset colour + alpha
@@ -443,9 +473,12 @@ if global.edit = 1
 					{
 
 							if i = 0 then  psych_edit -= 1
-							if i = 1 then  psych_edit -= 10		
-							//if b_d > 1000 {b_d = 1000}
-							//if b_d < 0 {b_d = 0}
+							if i = 1 then  psych_edit -= 10	
+							total_effect = psych_edit + stim_edit + diss_edit
+							other_effect = stim_edit + diss_edit
+							if total_effect > 100 then psych_edit = 100-other_effect //if total is greater than 100
+							if psych_edit < 0 then psych_edit = 0 //if less than zero set to zero
+							total_effect = psych_edit + stim_edit + diss_edit
 					}
 					draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
 					draw_set_alpha(1) //reset colour + alpha
@@ -454,6 +487,8 @@ if global.edit = 1
 					if i = 1 then  draw_text_transformed(xx,yy+(i*y_deep),string("-10"),1,1,0) //draw name of drug	
 					draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,1) //draw outline box
 				}
+				
+				
 				
 				
 				
@@ -469,7 +504,7 @@ if global.edit = 1
 		draw_set_colour(c_white)
 		draw_set_alpha(1) //reset colour + alpha
 		draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
-		draw_text(xx,yy-y_deep,string("Stimulating"))	
+		draw_text(xx,yy-y_deep,string("Stimulating (%)"))	
 		draw_set_colour(c_black)		
 		if !editing //if not editing then set file name as text
 			{
@@ -494,9 +529,11 @@ if global.edit = 1
 
 							if i = 0 then  stim_edit += 1
 							if i = 1 then  stim_edit += 10
-							//total_effect = psych + stim + diss
-							//if  > 1000 {b_d = 1000}
-							//if b_d < 0 {b_d = 0}
+							total_effect = psych_edit + stim_edit + diss_edit
+							other_effect = psych_edit + diss_edit
+							if total_effect > 100 then stim_edit = 100-other_effect //if total is greater than 100
+							if stim_edit < 0 then stim_edit = 0 //if less than zero set to zero
+							total_effect = psych_edit + stim_edit + diss_edit
 					}
 					draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
 					draw_set_alpha(1) //reset colour + alpha
@@ -517,8 +554,11 @@ if global.edit = 1
 
 							if i = 0 then  stim_edit -= 1
 							if i = 1 then  stim_edit -= 10		
-							//if b_d > 1000 {b_d = 1000}
-							//if b_d < 0 {b_d = 0}
+							total_effect = psych_edit + stim_edit + diss_edit
+							other_effect = psych_edit + diss_edit
+							if total_effect > 100 then stim_edit = 100-other_effect //if total is greater than 100
+							if stim_edit < 0 then stim_edit = 0 //if less than zero set to zero
+							total_effect = psych_edit + stim_edit + diss_edit
 					}
 					draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
 					draw_set_alpha(1) //reset colour + alpha
@@ -542,7 +582,7 @@ if global.edit = 1
 		draw_set_colour(c_white)
 		draw_set_alpha(1) //reset colour + alpha
 		draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
-		draw_text(xx,yy-y_deep,string("Dissociating"))	
+		draw_text(xx,yy-y_deep,string("Dissociating (%)"))	
 		draw_set_colour(c_black)		
 		if !editing //if not editing then set file name as text
 			{
@@ -567,9 +607,11 @@ if global.edit = 1
 
 							if i = 0 then  diss_edit += 1
 							if i = 1 then  diss_edit += 10
-							//total_effect = psych + stim + diss
-							//if  > 1000 {b_d = 1000}
-							//if b_d < 0 {b_d = 0}
+							total_effect = psych_edit + stim_edit + diss_edit
+							other_effect = psych_edit + stim_edit
+							if total_effect > 100 then diss_edit = 100-other_effect //if total is greater than 100
+							if diss_edit < 0 then diss_edit = 0 //if less than zero set to zero
+							total_effect = psych_edit + stim_edit + diss_edit
 					}
 					draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
 					draw_set_alpha(1) //reset colour + alpha
@@ -590,8 +632,11 @@ if global.edit = 1
 
 							if i = 0 then  diss_edit -= 1
 							if i = 1 then  diss_edit -= 10		
-							//if b_d > 1000 {b_d = 1000}
-							//if b_d < 0 {b_d = 0}
+							total_effect = psych_edit + stim_edit + diss_edit
+							other_effect = psych_edit + stim_edit
+							if total_effect > 100 then diss_edit = 100-other_effect //if total is greater than 100
+							if diss_edit < 0 then diss_edit = 0 //if less than zero set to zero
+							total_effect = psych_edit + stim_edit + diss_edit
 					}
 					draw_rectangle(xx,yy+(i*y_deep),xx+x_wide,yy+(i*y_deep)+y_deep,0)
 					draw_set_alpha(1) //reset colour + alpha
@@ -629,7 +674,49 @@ if global.edit = 1
 		for(var i=0; i<24; i +=1) //draw numbers on axis
 				{
 					draw_text((sz*global.gridsx/24)*(i+0.55)+sx,global.minis_y-(mar*3.2),string(edit_stats[i]))
-				}			
+				}		
+				
+			
+		//COLOUR BOXES
+		
+	
+			var y_deep = (room_height/30) 
+			var x_wide = ((mar*12)) //size	
+			var xx = global.minis_x+y_deep+(x_wide*1.5)
+			var yy = global.minis_y+(y_deep*3)	
+			scr_colour_edit(colour)
+			current_colour =make_color_rgb(r_ed,g_ed,bl_ed)
+			draw_set_color(current_colour)
+			draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
+			draw_set_color(c_white)
+			draw_text(xx,yy-y_deep,"COLOUR")
+
+		if editing 
+		{
+			var y_deep = (room_height/30) 
+			var x_wide = ((mar*2)) //size	
+			var xx = global.minis_x+y_deep+(mar*32)
+			var yy = global.minis_y+(y_deep*3)	
+			
+			for(var i=1; i<12; i += 1) //create list
+				{
+					
+					var hover = point_in_rectangle(mouse_x,mouse_y,xx+(i*x_wide),yy,xx+x_wide+(x_wide*i),yy+y_deep)
+					if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+					if hover && mouse_check_button_pressed(mb_left) then
+					{
+					
+					}
+					scr_colour_edit(i)
+					c_editing =make_color_rgb(r_ed,g_ed,bl_ed)
+					draw_set_colour(c_editing)
+					draw_rectangle(xx+(i*x_wide),yy,xx+x_wide+(x_wide*i),yy+y_deep,0)
+					draw_set_alpha(1) //reset colour + alpha
+					draw_set_colour(c_black)
+					draw_rectangle(xx+(i*x_wide),yy,xx+x_wide+(x_wide*i),yy+y_deep,1) //draw outline box
+				}
+
+		}
 				
 		//Up and down edit stat buttons	
 		if editing then 
@@ -1543,7 +1630,7 @@ draw_set_alpha(1)
 
 
 
-//draw_text(30,50,keyboard_string)
+draw_text(30,50,total_effect)
 //draw_text(1200,420,global.extend)
 //draw_text(1200,440,global.peaked)
 //draw_text(32, 32, global.zoom_hr);

@@ -23,6 +23,11 @@ shift = 0
 reset = 0
 editing = 0
 str = ""
+error = 0
+total_effect = 0
+red = 0
+green = 0
+blue = 0
 
 draw_set_font(fnt_default);
 scr_sum() //calculate totals
