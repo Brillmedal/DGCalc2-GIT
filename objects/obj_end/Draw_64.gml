@@ -1,4 +1,4 @@
-if global.indicator
+if global.indicator && (global.edit = 0)
 
 {
 

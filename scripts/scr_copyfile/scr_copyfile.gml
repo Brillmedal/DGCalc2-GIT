@@ -132,7 +132,7 @@ if file_exists("list.txt") //if file exists
 		//WRITE NEW DRUG IN PLACE
 	file_text_write_string(filecopy,keyboard_string) //NAME
 	 file_text_writeln(filecopy);
-	file_text_write_real(filecopy,2)  //COLOUR
+	file_text_write_real(filecopy,chosen_colour)  //COLOUR
 	 file_text_writeln(filecopy);
 	file_text_write_real(filecopy,psych_edit)  //PSYCH
 	file_text_write_real(filecopy,stim_edit) //STIM
@@ -165,7 +165,7 @@ if file_exists("list.txt") //if file exists
 	file_text_write_real(filecopy,T22)
 	file_text_write_real(filecopy,T23) //T23
 	 file_text_writeln(filecopy);
-	file_text_write_real(filecopy,1) //UNIT
+	file_text_write_real(filecopy,unit_edit) //UNIT
 	file_text_writeln(filecopy);
 	file_text_writeln(filecopy);
 	

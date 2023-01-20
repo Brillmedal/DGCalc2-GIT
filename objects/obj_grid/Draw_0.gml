@@ -124,14 +124,22 @@ var x_wide = global.menu_width-(mar*2) //size
 draw_set_colour(c_white)
 var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
 if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
-if hover && mouse_check_button_pressed(mb_left) then { if global.edit = 1 then global.edit = 0 else global.edit = 1 ; reset = 0; global.select = 1; error = 0} //if clicked then tell variable
+if hover && mouse_check_button_pressed(mb_left) then 
+{
+	if global.edit = 1 then global.edit = 0 else global.edit = 1 ;
+	reset = 0;
+	global.select = 1;
+	error = 0
+	total_effect = 0
+	
+} //if clicked then tell variable
 draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
 draw_set_alpha(1) //reset colour + alpha
 draw_set_colour(c_black)
 if global.edit = 0 then
 	{ draw_text(xx+(x_wide/4),yy,string("VIEW STATS")); editing = 0 }
 else 
-	{ draw_text(xx+(x_wide/6),yy,string("DISCARD UNSAVED")) }
+	{ draw_text(xx+(x_wide/6),yy,string("DISCARD UNSAVED")); }
 
 
 //SAVE AND EDIT
@@ -150,11 +158,19 @@ if global.edit = 1
 		draw_set_colour(c_white)
 		var hover = point_in_rectangle(mouse_x,mouse_y,xx,yy,xx+x_wide,yy+y_deep)
 		if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
-		if hover && mouse_check_button_pressed(mb_left) then { editing = 1; psych_edit = psych; diss_edit = diss; stim_edit = stim } //if clicked then tell variable
+		if hover && mouse_check_button_pressed(mb_left) then
+		{ 
+			editing = 1;
+			psych_edit = psych; 
+			diss_edit = diss;
+			stim_edit = stim
+			chosen_colour = colour
+		} //if clicked then tell variable
 		draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
 		draw_set_alpha(1) //reset colour + alpha
 		draw_set_colour(c_black)
 		draw_text(xx+(x_wide/3),yy,string("EDIT"))
+		unit_edit = global.unit
 	}
 	
 	else
@@ -162,6 +178,7 @@ if global.edit = 1
 	//SAVE BUTTON
 	
 	{
+		
 		var y_deep = room_height/40
 		var yy = (room_height-(mar*2))-(y_deep+px_mar)
 		var xx = (room_width-global.menu_width)+mar //starting position of selection boxes
@@ -679,14 +696,21 @@ if global.edit = 1
 			
 		//COLOUR BOXES
 		
-	
 			var y_deep = (room_height/30) 
 			var x_wide = ((mar*12)) //size	
-			var xx = global.minis_x+y_deep+(x_wide*1.5)
-			var yy = global.minis_y+(y_deep*3)	
-			scr_colour_edit(colour)
-			current_colour =make_color_rgb(r_ed,g_ed,bl_ed)
-			draw_set_color(current_colour)
+			var xx = global.minis_x+y_deep+(x_wide*2.6)
+			var yy = global.minis_y+(y_deep*3)
+			if editing = 0  //if editing then let colour equal the current read one
+				{
+					scr_colour_edit(colour)
+					current_colour =make_color_rgb(r_ed,g_ed,bl_ed)			
+				}
+			else //otherwise let the colour equal the chosen one
+				{
+					scr_colour_edit(chosen_colour)
+					current_colour =make_color_rgb(r_ed,g_ed,bl_ed)		
+				}
+			draw_set_color(current_colour) 
 			draw_rectangle(xx,yy,xx+x_wide,yy+y_deep,0)
 			draw_set_color(c_white)
 			draw_text(xx,yy-y_deep,"COLOUR")
@@ -695,17 +719,17 @@ if global.edit = 1
 		{
 			var y_deep = (room_height/30) 
 			var x_wide = ((mar*2)) //size	
-			var xx = global.minis_x+y_deep+(mar*32)
+			var xx = global.minis_x+y_deep+(mar*42)
 			var yy = global.minis_y+(y_deep*3)	
 			
 			for(var i=1; i<12; i += 1) //create list
 				{
 					
 					var hover = point_in_rectangle(mouse_x,mouse_y,xx+(i*x_wide),yy,xx+x_wide+(x_wide*i),yy+y_deep)
-					if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1); } //If mouse detcted, set alpha + hover
+					if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1);} //If mouse detcted, set alpha + hover
 					if hover && mouse_check_button_pressed(mb_left) then
 					{
-					
+					 chosen_colour = i
 					}
 					scr_colour_edit(i)
 					c_editing =make_color_rgb(r_ed,g_ed,bl_ed)
@@ -717,7 +741,65 @@ if global.edit = 1
 				}
 
 		}
-				
+		
+		//UNIT BUTTONS
+		
+				//COLOUR BOXES
+		
+			var y_deep = (room_height/30) 
+			var x_wide = ((mar*4)) //size	
+			var xx = global.minis_x+y_deep+(x_wide*3.5)
+			var yy = global.minis_y+(y_deep*3)
+			draw_set_color(c_white)
+			draw_set_color(c_white)
+			draw_text(xx+(x_wide*1.2),yy-y_deep,"UNIT")
+			
+
+							for(var i=1; i<4; i += 1) //create list
+				{
+					if editing then
+					{
+						var hover = point_in_rectangle(mouse_x,mouse_y,xx+(i*x_wide),yy,xx+x_wide+(x_wide*i),yy+y_deep)
+						if hover then { draw_set_alpha(0.5); hover=1 } else { draw_set_alpha(1);} //If mouse detcted, set alpha + hover
+						if hover && mouse_check_button_pressed(mb_left) then
+						{
+						 if i = 1 then { unit_edit = 1 }
+						 if i = 2 then { unit_edit = 2 }
+						 if i = 3 then { unit_edit = 3 }
+						}
+
+					}
+					if unit_edit = i then 
+						{
+							draw_set_alpha(0.5)
+						}
+					else
+						{
+							draw_set_alpha(1)
+						}
+					draw_set_color(c_white)
+					draw_rectangle(xx+(i*x_wide),yy,xx+x_wide+(x_wide*i),yy+y_deep,0)
+					draw_set_alpha(1)
+					draw_set_colour(c_black)
+					
+					 if i = 1 then
+						{ 
+							 draw_text(xx+(i*x_wide)+(x_wide*0.2),yy,"mg")
+						 }
+					 if i = 2 then 
+						{
+							 draw_text(xx+(i*x_wide)+(x_wide*0.2),yy,"ug") 			 
+						}
+					 if i = 3 then
+						 {
+							 draw_text(xx+(i*x_wide)+(x_wide*0.2),yy,"g")
+						 }
+					
+					draw_rectangle(xx+(i*x_wide),yy,xx+x_wide+(x_wide*i),yy+y_deep,1) //draw outline box
+				}
+			
+
+	
 		//Up and down edit stat buttons	
 		if editing then 
 		

@@ -28,6 +28,8 @@ total_effect = 0
 red = 0
 green = 0
 blue = 0
+chosen_colour = 0
+unit_edit = 0
 
 draw_set_font(fnt_default);
 scr_sum() //calculate totals
