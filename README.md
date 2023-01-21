@@ -9,7 +9,7 @@ It's as comprehensive as it needs to be, features adjustment for synergy, tolera
 overall intensity and several preset days, plenty of keyboard shortcuts, some indicator lines, editing,
 an ordered schedule, and can change time formats to suit.
 
-**UPDATE: You can now edit compound stats within the app voiding need to edit text files.**
+**UPDATE: You can now edit compound stats within the app voiding the need to edit text files.**
 
 This is avaliable on Windows and Mac; and was built in gamemaker which is a C based language.
 
