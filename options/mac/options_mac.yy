@@ -2,7 +2,7 @@
   "resourceType": "GMMacOptions",
   "resourceVersion": "1.0",
   "name": "macOS",
-  "option_mac_display_name": "Created with GameMaker",
+  "option_mac_display_name": "Dosage Graph Calculator V2",
   "option_mac_app_id": "com.company.game",
   "option_mac_version": "1.0.0.0",
   "option_mac_output_dir": "~/gamemakerstudio2",
@@ -31,4 +31,5 @@
   "option_mac_x86_64": true,
   "option_mac_arm64": true,
   "option_mac_apple_sign_in": false,
+  "option_mac_min_version": "10.10",
 }

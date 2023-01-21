@@ -687,11 +687,13 @@ if global.edit = 1
 		var sz = global.gridsize
 		draw_set_colour(c_white)
 
-		
+		if editing = 1
+		{
 		for(var i=0; i<24; i +=1) //draw numbers on axis
 				{
 					draw_text((sz*global.gridsx/24)*(i+0.55)+sx,global.minis_y-(mar*3.2),string(edit_stats[i]))
 				}		
+		}
 				
 			
 		//COLOUR BOXES
@@ -848,7 +850,23 @@ if global.edit = 1
 				}
 		
 		}
+	else //DRAW STAT GRAPH BOX
 	
+	{
+			
+		var xx = (sz*global.gridsx/24)
+		var yy = global.minis_y-(mar*1.5)
+		var x_wide = ((mar*2.63)) //size
+		var y_deep = (room_height/45) 
+		
+		for(var i=1; i<24; i +=1) //
+				{
+					Ti = edit_stats[i] //how high to make boxes
+					draw_set_colour(current_colour)
+					draw_rectangle(xx+(x_wide*i)+(px_mar*i),y_deep+yy-((mar/1.65)*Ti),xx+x_wide+(x_wide*i)+(px_mar*i),yy+y_deep,0)
+				}
+		
+	}
 	
 }
 
@@ -1712,7 +1730,7 @@ draw_set_alpha(1)
 
 
 
-draw_text(30,50,total_effect)
+//draw_text(30,50,total_effect)
 //draw_text(1200,420,global.extend)
 //draw_text(1200,440,global.peaked)
 //draw_text(32, 32, global.zoom_hr);
